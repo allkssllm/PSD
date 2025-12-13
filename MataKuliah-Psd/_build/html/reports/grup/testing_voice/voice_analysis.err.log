@@ -1,0 +1,138 @@
+Traceback (most recent call last):
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\nbclient\client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Nama file: 1_ekstraksi_TSFEL_Perintah.py
+import os
+import librosa
+import numpy as np
+import pandas as pd
+from tqdm import tqdm
+import tsfel 
+import warnings
+
+warnings.filterwarnings('ignore')
+
+# --- Konfigurasi ---
+# Ganti ini ke path folder Anda yang berisi /Abdi, /Alex, dll.
+DATASET_PATH = r"D:\VSCode1\MatKul-psd\PSD\MataKuliah-Psd\grup\testing_voice\data\dataset-audio" 
+COMMANDS = ["buka", "tutup"] 
+OUTPUT_CSV = "perintah_features_RAW_tsfel.csv" # Nama file output
+
+try:
+    cfg = tsfel.get_features_by_domain()
+    print(f"Konfigurasi TSFEL berhasil dimuat.")
+except Exception as e:
+    print(f"Error saat memuat konfigurasi TSFEL: {e}")
+    cfg = None
+
+def extract_tsfel_features(file_path, cfg):
+    try:
+        audio, sr = librosa.load(file_path, sr=None)
+        features_df = tsfel.time_series_features_extractor(cfg, audio, fs=sr, verbose=0) 
+        return features_df
+    except Exception as e:
+        print(f"Error memproses {file_path}: {e}")
+        return None
+
+# --- Main Execution ---
+if cfg is not None:
+    all_data_dfs = [] 
+    print(f"Memulai ekstraksi fitur TSFEL dari {DATASET_PATH}...")
+
+    try:
+        speakers = [s for s in os.listdir(DATASET_PATH) if os.path.isdir(os.path.join(DATASET_PATH, s))]
+    except FileNotFoundError:
+        print(f"Error: Path dataset {DATASET_PATH} tidak ditemukan.")
+        speakers = []
+        
+    if not speakers:
+        print(f"Tidak ada folder speaker ditemukan.")
+    else:
+        print(f"Ditemukan speakers: {speakers}")
+
+    for speaker in speakers:
+        speaker_path = os.path.join(DATASET_PATH, speaker)
+        
+        for command in COMMANDS:
+            command_path = os.path.join(speaker_path, command)
+            
+            if not os.path.isdir(command_path):
+                continue
+
+            files = [f for f in os.listdir(command_path) if f.endswith('.wav')]
+            
+            desc = f"Memproses {speaker} -> {command} (TSFEL)"
+            for file_name in tqdm(files, desc=desc):
+                file_path = os.path.join(command_path, file_name)
+                features_df = extract_tsfel_features(file_path, cfg)
+                
+                if features_df is not None:
+                    # Simpan HANYA label perintah
+                    features_df['label_perintah'] = command
+                    all_data_dfs.append(features_df)
+
+    print("\nEkstraksi fitur TSFEL selesai.")
+
+    if all_data_dfs:
+        data = pd.concat(all_data_dfs, ignore_index=True)
+        print(f"Data TSFEL diekstrak: {data.shape[0]} baris")
+        print(data['label_perintah'].value_counts())
+
+        # --- Pembersihan Data Awal ---
+        data.fillna(0, inplace=True)
+        feature_cols = [col for col in data.columns if col != 'label_perintah']
+        non_variant_cols = [col for col in feature_cols if data[col].nunique() == 1]
+        
+        if non_variant_cols:
+            print(f"Menghapus {len(non_variant_cols)} kolom konstan...")
+            data.drop(columns=non_variant_cols, inplace=True)
+            
+        print(f"Data TSFEL setelah pembersihan: {data.shape[0]} baris, {data.shape[1]} kolom")
+
+        data.to_csv(OUTPUT_CSV, index=False)
+        print(f"Berhasil! Data fitur TSFEL telah disimpan ke {OUTPUT_CSV}")
+    else:
+        print("Tidak ada data TSFEL yang berhasil diekstrak.")
+else:
+    print("Ekstraksi fitur TSFEL dibatalkan.")
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 3[39m
+[32m      1[39m [38;5;66;03m# Nama file: 1_ekstraksi_TSFEL_Perintah.py[39;00m
+[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mos[39;00m
+[32m----> [39m[32m3[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mlibrosa[39;00m
+[32m      4[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mnp[39;00m
+[32m      5[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
+
+[31mModuleNotFoundError[39m: No module named 'librosa'
+
