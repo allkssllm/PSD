@@ -1,0 +1,2938 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Klasifikasi Perintah Suara &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'audio2';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Audio DTW" href="audioDtw.html" />
+    <link rel="prev" title="Klasifikasi Perintah Suara" href="audio.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Sain Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="businessUnderstanding.html">Business Understanding</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataUnderstanding.html">Data Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="explorasiData.html">Explorasi Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analisisDataKnime.html">Analisa Data &amp; Klasifikasi Tools Knime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataPreprocessing.html">Data Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="abod.html">Deteksi Outlier ABOD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oversampling.html">Oversampling</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="forecasting.html">Forecasting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="forecasting2.html">Forecasting dengan AutoKorelasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audioDtw.html">Audio DTW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeSeriesSmote.html"><strong>Data Understanding</strong></a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="random.html">File Testing</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Faudio2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/audio2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Klasifikasi Perintah Suara</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skrip-perekam-data-audio">Skrip Perekam Data Audio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-versi-20-mfcc">Ekstraksi Fitur (Versi 20 MFCC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelatihan-evaluasi-dan-penyimpanan-model-svc">Pelatihan, Evaluasi, dan Penyimpanan Model (SVC)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-perintah-suara">
+<h1>Klasifikasi Perintah Suara<a class="headerlink" href="#klasifikasi-perintah-suara" title="Link to this heading">#</a></h1>
+<section id="import-library">
+<h2>Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h2>
+<p>Cell ini berfungsi untuk mengimpor semua library Python yang diperlukan untuk proyek ini, seperti <code class="docutils literal notranslate"><span class="pre">librosa</span></code> untuk analisis audio, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dan <code class="docutils literal notranslate"><span class="pre">numpy</span></code> untuk manipulasi data, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> untuk visualisasi, dan <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> untuk pemodelan machine learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sounddevice</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.io.wavfile</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wav</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sounddevice</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.io.wavfile</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wav</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sounddevice&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="skrip-perekam-data-audio">
+<h2>Skrip Perekam Data Audio<a class="headerlink" href="#skrip-perekam-data-audio" title="Link to this heading">#</a></h2>
+<p>Cell ini berfungsi sebagai alat bantu untuk akuisisi (pengumpulan) data.<br />
+Tujuannya adalah untuk merekam dan membuat dataset audio secara otomatis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Konfigurasi ---</span>
+<span class="n">JUMLAH_SAMPEL</span> <span class="o">=</span> <span class="mi">100</span>      <span class="c1"># 100x rekaman per kata</span>
+<span class="n">DURASI_REKAMAN</span> <span class="o">=</span> <span class="mf">1.5</span>    <span class="c1"># Durasi rekaman dalam detik (sesuaikan jika perlu)</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>     <span class="c1"># Standar untuk speech recognition</span>
+<span class="n">KATA_TARGET</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;buka&quot;</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">]</span>
+<span class="n">FOLDER_DATA</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil&quot;</span>
+<span class="c1"># --------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rekam_audio</span><span class="p">(</span><span class="n">durasi</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merekam audio dari mikrofon default.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merekam...&quot;</span><span class="p">)</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">rec</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">durasi</span> <span class="o">*</span> <span class="n">sr</span><span class="p">),</span> <span class="n">samplerate</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">sd</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>  <span class="c1"># Menunggu rekaman selesai</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rekaman selesai.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">audio</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simpan_audio</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Menyimpan audio ke file WAV.&quot;&quot;&quot;</span>
+    <span class="c1"># Normalisasi audio untuk menghindari clipping (jika terlalu keras)</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">audio</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">audio</span><span class="p">))</span>
+    <span class="c1"># Konversi ke 16-bit integer (format WAV standar)</span>
+    <span class="n">audio_int16</span> <span class="o">=</span> <span class="p">(</span><span class="n">audio</span> <span class="o">*</span> <span class="mi">32767</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+    <span class="n">wav</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">audio_int16</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File disimpan di: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Skrip Perekam Data Audio ---&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target: </span><span class="si">{</span><span class="n">JUMLAH_SAMPEL</span><span class="si">}</span><span class="s2"> sampel per kata.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kata: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">KATA_TARGET</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Membuat folder data utama jika belum ada</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">FOLDER_DATA</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">FOLDER_DATA</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">KATA_TARGET</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">======= MULAI MEREKAM KATA: &#39;</span><span class="si">{</span><span class="n">kata</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39; =======&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Membuat sub-folder untuk setiap kata</span>
+        <span class="n">folder_kata</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FOLDER_DATA</span><span class="p">,</span> <span class="n">kata</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder_kata</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder_kata</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data akan disimpan di folder: </span><span class="si">{</span><span class="n">folder_kata</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tekan ENTER untuk memulai rekaman pertama...&quot;</span><span class="p">)</span>
+        <span class="nb">input</span><span class="p">()</span> <span class="c1"># Menunggu kesiapan pengguna</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">JUMLAH_SAMPEL</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Merekam sampel ke-</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">JUMLAH_SAMPEL</span><span class="si">}</span><span class="s2"> untuk &#39;</span><span class="si">{</span><span class="n">kata</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39; ---&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Beri waktu pengguna untuk bersiap</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bersiap dalam 3...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BICARA SEKARANG!&quot;</span><span class="p">)</span>
+
+                <span class="c1"># 1. Rekam</span>
+                <span class="n">audio_rekaman</span> <span class="o">=</span> <span class="n">rekam_audio</span><span class="p">(</span><span class="n">DURASI_REKAMAN</span><span class="p">,</span> <span class="n">SAMPLE_RATE</span><span class="p">)</span>
+                
+                <span class="c1"># 2. Simpan</span>
+                <span class="c1"># Format nama file: buka_001.wav, buka_002.wav, ...</span>
+                <span class="n">nama_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">kata</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">.wav&quot;</span> 
+                <span class="n">path_file_lengkap</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_kata</span><span class="p">,</span> <span class="n">nama_file</span><span class="p">)</span>
+                <span class="n">simpan_audio</span><span class="p">(</span><span class="n">audio_rekaman</span><span class="p">,</span> <span class="n">path_file_lengkap</span><span class="p">,</span> <span class="n">SAMPLE_RATE</span><span class="p">)</span>
+
+                <span class="c1"># Jeda singkat antar rekaman</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Proses dihentikan oleh pengguna.&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terjadi error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mencoba lanjut ke sampel berikutnya...&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">======== PENGUMPULAN DATA SELESAI! ========&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Semua data tersimpan di folder &#39;</span><span class="si">{</span><span class="n">FOLDER_DATA</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Skrip Perekam Data Audio ---
+Target: 100 sampel per kata.
+Kata: buka, tutup
+----------------------------------
+
+
+======= MULAI MEREKAM KATA: &#39;BUKA&#39; =======
+Data akan disimpan di folder: ./dataset/data-hasil2\buka
+Tekan ENTER untuk memulai rekaman pertama...
+
+--- Merekam sampel ke-1/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_001.wav
+
+--- Merekam sampel ke-2/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_002.wav
+
+--- Merekam sampel ke-3/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_003.wav
+
+--- Merekam sampel ke-4/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_004.wav
+
+--- Merekam sampel ke-5/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_005.wav
+
+--- Merekam sampel ke-6/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_006.wav
+
+--- Merekam sampel ke-7/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_007.wav
+
+--- Merekam sampel ke-8/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_008.wav
+
+--- Merekam sampel ke-9/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_009.wav
+
+--- Merekam sampel ke-10/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_010.wav
+
+--- Merekam sampel ke-11/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_011.wav
+
+--- Merekam sampel ke-12/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_012.wav
+
+--- Merekam sampel ke-13/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_013.wav
+
+--- Merekam sampel ke-14/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_014.wav
+
+--- Merekam sampel ke-15/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_015.wav
+
+--- Merekam sampel ke-16/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_016.wav
+
+--- Merekam sampel ke-17/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_017.wav
+
+--- Merekam sampel ke-18/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_018.wav
+
+--- Merekam sampel ke-19/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_019.wav
+
+--- Merekam sampel ke-20/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_020.wav
+
+--- Merekam sampel ke-21/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_021.wav
+
+--- Merekam sampel ke-22/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_022.wav
+
+--- Merekam sampel ke-23/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_023.wav
+
+--- Merekam sampel ke-24/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_024.wav
+
+--- Merekam sampel ke-25/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_025.wav
+
+--- Merekam sampel ke-26/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_026.wav
+
+--- Merekam sampel ke-27/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_027.wav
+
+--- Merekam sampel ke-28/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_028.wav
+
+--- Merekam sampel ke-29/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_029.wav
+
+--- Merekam sampel ke-30/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_030.wav
+
+--- Merekam sampel ke-31/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_031.wav
+
+--- Merekam sampel ke-32/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_032.wav
+
+--- Merekam sampel ke-33/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_033.wav
+
+--- Merekam sampel ke-34/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_034.wav
+
+--- Merekam sampel ke-35/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_035.wav
+
+--- Merekam sampel ke-36/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_036.wav
+
+--- Merekam sampel ke-37/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_037.wav
+
+--- Merekam sampel ke-38/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_038.wav
+
+--- Merekam sampel ke-39/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_039.wav
+
+--- Merekam sampel ke-40/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_040.wav
+
+--- Merekam sampel ke-41/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_041.wav
+
+--- Merekam sampel ke-42/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_042.wav
+
+--- Merekam sampel ke-43/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_043.wav
+
+--- Merekam sampel ke-44/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_044.wav
+
+--- Merekam sampel ke-45/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_045.wav
+
+--- Merekam sampel ke-46/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_046.wav
+
+--- Merekam sampel ke-47/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_047.wav
+
+--- Merekam sampel ke-48/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_048.wav
+
+--- Merekam sampel ke-49/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_049.wav
+
+--- Merekam sampel ke-50/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_050.wav
+
+--- Merekam sampel ke-51/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_051.wav
+
+--- Merekam sampel ke-52/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_052.wav
+
+--- Merekam sampel ke-53/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_053.wav
+
+--- Merekam sampel ke-54/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_054.wav
+
+--- Merekam sampel ke-55/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_055.wav
+
+--- Merekam sampel ke-56/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_056.wav
+
+--- Merekam sampel ke-57/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_057.wav
+
+--- Merekam sampel ke-58/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_058.wav
+
+--- Merekam sampel ke-59/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_059.wav
+
+--- Merekam sampel ke-60/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_060.wav
+
+--- Merekam sampel ke-61/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_061.wav
+
+--- Merekam sampel ke-62/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_062.wav
+
+--- Merekam sampel ke-63/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_063.wav
+
+--- Merekam sampel ke-64/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_064.wav
+
+--- Merekam sampel ke-65/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_065.wav
+
+--- Merekam sampel ke-66/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_066.wav
+
+--- Merekam sampel ke-67/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_067.wav
+
+--- Merekam sampel ke-68/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_068.wav
+
+--- Merekam sampel ke-69/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_069.wav
+
+--- Merekam sampel ke-70/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_070.wav
+
+--- Merekam sampel ke-71/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_071.wav
+
+--- Merekam sampel ke-72/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_072.wav
+
+--- Merekam sampel ke-73/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_073.wav
+
+--- Merekam sampel ke-74/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_074.wav
+
+--- Merekam sampel ke-75/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_075.wav
+
+--- Merekam sampel ke-76/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_076.wav
+
+--- Merekam sampel ke-77/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_077.wav
+
+--- Merekam sampel ke-78/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_078.wav
+
+--- Merekam sampel ke-79/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_079.wav
+
+--- Merekam sampel ke-80/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_080.wav
+
+--- Merekam sampel ke-81/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_081.wav
+
+--- Merekam sampel ke-82/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_082.wav
+
+--- Merekam sampel ke-83/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_083.wav
+
+--- Merekam sampel ke-84/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_084.wav
+
+--- Merekam sampel ke-85/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_085.wav
+
+--- Merekam sampel ke-86/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_086.wav
+
+--- Merekam sampel ke-87/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_087.wav
+
+--- Merekam sampel ke-88/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_088.wav
+
+--- Merekam sampel ke-89/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_089.wav
+
+--- Merekam sampel ke-90/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_090.wav
+
+--- Merekam sampel ke-91/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_091.wav
+
+--- Merekam sampel ke-92/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_092.wav
+
+--- Merekam sampel ke-93/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_093.wav
+
+--- Merekam sampel ke-94/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_094.wav
+
+--- Merekam sampel ke-95/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_095.wav
+
+--- Merekam sampel ke-96/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_096.wav
+
+--- Merekam sampel ke-97/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_097.wav
+
+--- Merekam sampel ke-98/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_098.wav
+
+--- Merekam sampel ke-99/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_099.wav
+
+--- Merekam sampel ke-100/100 untuk &#39;BUKA&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\buka\buka_100.wav
+
+======= MULAI MEREKAM KATA: &#39;TUTUP&#39; =======
+Data akan disimpan di folder: ./dataset/data-hasil2\tutup
+Tekan ENTER untuk memulai rekaman pertama...
+
+--- Merekam sampel ke-1/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_001.wav
+
+--- Merekam sampel ke-2/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_002.wav
+
+--- Merekam sampel ke-3/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_003.wav
+
+--- Merekam sampel ke-4/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_004.wav
+
+--- Merekam sampel ke-5/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_005.wav
+
+--- Merekam sampel ke-6/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_006.wav
+
+--- Merekam sampel ke-7/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_007.wav
+
+--- Merekam sampel ke-8/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_008.wav
+
+--- Merekam sampel ke-9/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_009.wav
+
+--- Merekam sampel ke-10/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_010.wav
+
+--- Merekam sampel ke-11/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_011.wav
+
+--- Merekam sampel ke-12/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_012.wav
+
+--- Merekam sampel ke-13/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_013.wav
+
+--- Merekam sampel ke-14/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_014.wav
+
+--- Merekam sampel ke-15/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_015.wav
+
+--- Merekam sampel ke-16/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_016.wav
+
+--- Merekam sampel ke-17/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_017.wav
+
+--- Merekam sampel ke-18/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_018.wav
+
+--- Merekam sampel ke-19/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_019.wav
+
+--- Merekam sampel ke-20/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_020.wav
+
+--- Merekam sampel ke-21/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_021.wav
+
+--- Merekam sampel ke-22/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_022.wav
+
+--- Merekam sampel ke-23/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_023.wav
+
+--- Merekam sampel ke-24/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_024.wav
+
+--- Merekam sampel ke-25/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_025.wav
+
+--- Merekam sampel ke-26/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_026.wav
+
+--- Merekam sampel ke-27/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_027.wav
+
+--- Merekam sampel ke-28/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_028.wav
+
+--- Merekam sampel ke-29/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_029.wav
+
+--- Merekam sampel ke-30/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_030.wav
+
+--- Merekam sampel ke-31/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_031.wav
+
+--- Merekam sampel ke-32/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_032.wav
+
+--- Merekam sampel ke-33/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_033.wav
+
+--- Merekam sampel ke-34/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_034.wav
+
+--- Merekam sampel ke-35/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_035.wav
+
+--- Merekam sampel ke-36/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_036.wav
+
+--- Merekam sampel ke-37/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_037.wav
+
+--- Merekam sampel ke-38/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_038.wav
+
+--- Merekam sampel ke-39/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_039.wav
+
+--- Merekam sampel ke-40/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_040.wav
+
+--- Merekam sampel ke-41/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_041.wav
+
+--- Merekam sampel ke-42/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_042.wav
+
+--- Merekam sampel ke-43/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_043.wav
+
+--- Merekam sampel ke-44/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_044.wav
+
+--- Merekam sampel ke-45/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_045.wav
+
+--- Merekam sampel ke-46/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_046.wav
+
+--- Merekam sampel ke-47/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_047.wav
+
+--- Merekam sampel ke-48/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_048.wav
+
+--- Merekam sampel ke-49/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_049.wav
+
+--- Merekam sampel ke-50/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_050.wav
+
+--- Merekam sampel ke-51/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_051.wav
+
+--- Merekam sampel ke-52/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_052.wav
+
+--- Merekam sampel ke-53/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_053.wav
+
+--- Merekam sampel ke-54/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_054.wav
+
+--- Merekam sampel ke-55/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_055.wav
+
+--- Merekam sampel ke-56/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_056.wav
+
+--- Merekam sampel ke-57/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_057.wav
+
+--- Merekam sampel ke-58/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_058.wav
+
+--- Merekam sampel ke-59/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_059.wav
+
+--- Merekam sampel ke-60/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_060.wav
+
+--- Merekam sampel ke-61/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_061.wav
+
+--- Merekam sampel ke-62/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_062.wav
+
+--- Merekam sampel ke-63/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_063.wav
+
+--- Merekam sampel ke-64/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_064.wav
+
+--- Merekam sampel ke-65/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_065.wav
+
+--- Merekam sampel ke-66/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_066.wav
+
+--- Merekam sampel ke-67/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_067.wav
+
+--- Merekam sampel ke-68/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_068.wav
+
+--- Merekam sampel ke-69/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_069.wav
+
+--- Merekam sampel ke-70/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_070.wav
+
+--- Merekam sampel ke-71/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_071.wav
+
+--- Merekam sampel ke-72/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_072.wav
+
+--- Merekam sampel ke-73/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_073.wav
+
+--- Merekam sampel ke-74/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_074.wav
+
+--- Merekam sampel ke-75/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_075.wav
+
+--- Merekam sampel ke-76/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_076.wav
+
+--- Merekam sampel ke-77/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_077.wav
+
+--- Merekam sampel ke-78/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_078.wav
+
+--- Merekam sampel ke-79/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_079.wav
+
+--- Merekam sampel ke-80/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_080.wav
+
+--- Merekam sampel ke-81/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_081.wav
+
+--- Merekam sampel ke-82/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_082.wav
+
+--- Merekam sampel ke-83/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_083.wav
+
+--- Merekam sampel ke-84/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_084.wav
+
+--- Merekam sampel ke-85/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_085.wav
+
+--- Merekam sampel ke-86/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_086.wav
+
+--- Merekam sampel ke-87/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_087.wav
+
+--- Merekam sampel ke-88/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_088.wav
+
+--- Merekam sampel ke-89/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_089.wav
+
+--- Merekam sampel ke-90/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_090.wav
+
+--- Merekam sampel ke-91/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_091.wav
+
+--- Merekam sampel ke-92/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_092.wav
+
+--- Merekam sampel ke-93/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_093.wav
+
+--- Merekam sampel ke-94/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_094.wav
+
+--- Merekam sampel ke-95/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_095.wav
+
+--- Merekam sampel ke-96/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_096.wav
+
+--- Merekam sampel ke-97/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_097.wav
+
+--- Merekam sampel ke-98/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_098.wav
+
+--- Merekam sampel ke-99/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_099.wav
+
+--- Merekam sampel ke-100/100 untuk &#39;TUTUP&#39; ---
+Bersiap dalam 3...
+2...
+1...
+BICARA SEKARANG!
+Merekam...
+Rekaman selesai.
+File disimpan di: ./dataset/data-hasil2\tutup\tutup_100.wav
+
+
+======== PENGUMPULAN DATA SELESAI! ========
+Semua data tersimpan di folder &#39;./dataset/data-hasil2&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+
+<span class="c1"># --- Mari kita visualisasikan 1 sampel &quot;BUKA&quot; dan 1 sampel &quot;TUTUP&quot; ---</span>
+
+<span class="c1"># Tentukan path ke data Anda</span>
+<span class="n">PATH_DATA</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/&quot;</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>
+
+<span class="c1"># Ambil 1 contoh file</span>
+<span class="n">file_buka</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATA</span><span class="p">,</span> <span class="s2">&quot;buka&quot;</span><span class="p">,</span> <span class="s2">&quot;buka_001.wav&quot;</span><span class="p">)</span>
+<span class="n">file_tutup</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATA</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">,</span> <span class="s2">&quot;tutup_001.wav&quot;</span><span class="p">)</span>
+
+<span class="c1"># Muat file audio</span>
+<span class="n">y_buka</span><span class="p">,</span> <span class="n">sr_buka</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+<span class="n">y_tutup</span><span class="p">,</span> <span class="n">sr_tutup</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+
+<span class="c1"># --- Plotting ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># 1. Plot Waveform BUKA</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span><span class="n">y_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_buka</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Waveform: BUKA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitudo&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Plot Waveform TUTUP</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span><span class="n">y_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_tutup</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Waveform: TUTUP&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitudo&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Plot Mel Spectrogram BUKA</span>
+<span class="c1"># Spectrogram lebih baik dalam menunjukkan &#39;karakter&#39; suara</span>
+<span class="n">S_buka</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_buka</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">S_db_buka</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S_buka</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">S_db_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_buka</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mel Spectrogram: BUKA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frekuensi (Mel)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Waktu (detik)&#39;</span><span class="p">)</span>
+
+<span class="c1"># 4. Plot Mel Spectrogram TUTUP</span>
+<span class="n">S_tutup</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_tutup</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">S_db_tutup</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S_tutup</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">S_db_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_tutup</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mel Spectrogram: TUTUP&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frekuensi (Mel)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Waktu (detik)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4f349682843bd0e075ad7716f2ce3a56fea143aea8e2d3fa9266fecdcb57cc56.png" src="_images/4f349682843bd0e075ad7716f2ce3a56fea143aea8e2d3fa9266fecdcb57cc56.png" />
+</div>
+</div>
+</section>
+<section id="ekstraksi-fitur-versi-20-mfcc">
+<h2>Ekstraksi Fitur (Versi 20 MFCC)<a class="headerlink" href="#ekstraksi-fitur-versi-20-mfcc" title="Link to this heading">#</a></h2>
+<p>Cell kode ini adalah skrip alternatif yang lebih lengkap untuk melakukan ekstraksi fitur. Berbeda dengan di notebook (yang menggunakan 13 MFCC), skrip ini dikonfigurasi untuk mengekstrak 20 MFCC (N_MFCC = 20) untuk analisis yang berpotensi lebih detail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1"># Tentukan path ke folder data Anda</span>
+<span class="n">PATH_DATA</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/&quot;</span>
+<span class="n">LABELS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;buka&quot;</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">]</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>
+
+<span class="c1"># --- PENYESUAIAN ---</span>
+<span class="c1"># Mengubah jumlah MFCC dari 13 menjadi 20</span>
+<span class="n">N_MFCC</span> <span class="o">=</span> <span class="mi">20</span> 
+<span class="c1"># -------------------</span>
+
+<span class="c1"># Siapkan list untuk menampung data</span>
+<span class="n">data_fitur</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memulai ekstraksi fitur MFCC (n_mfcc=</span><span class="si">{</span><span class="n">N_MFCC</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Looping untuk setiap label (buka, tutup)</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">LABELS</span><span class="p">:</span>
+    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATA</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    
+    <span class="c1"># Dapatkan semua nama file di dalam folder</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.wav&#39;</span><span class="p">)]</span>
+    
+    <span class="c1"># Gunakan tqdm untuk melihat progress bar</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+            
+            <span class="c1"># 1. Muat file audio</span>
+            <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+            
+            <span class="c1"># 2. Ekstrak fitur MFCC (dengan n_mfcc=20)</span>
+            <span class="n">mfccs</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="n">N_MFCC</span><span class="p">)</span>
+            
+            <span class="c1"># 3. Ambil rata-rata MFCC di semua frame</span>
+            <span class="n">mfccs_rata_rata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mfccs</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            
+            <span class="c1"># 4. Simpan fitur dan label</span>
+            <span class="n">data_fitur</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mfccs_rata_rata</span><span class="p">)</span>
+            <span class="n">data_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error memproses file </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ekstraksi fitur selesai.&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Konversi ke DataFrame Pandas ---</span>
+
+<span class="c1"># Buat DataFrame dari list fitur</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_fitur</span><span class="p">)</span>
+
+<span class="c1"># Beri nama kolom (mfcc_0, mfcc_1, ..., mfcc_19)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;mfcc_&#39;</span><span class="p">)</span>
+
+<span class="c1"># Tambahkan kolom label</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_label</span>
+
+<span class="c1"># --- Simpan ke CSV ---</span>
+<span class="n">NAMA_FILE_CSV</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/fitur_audio_20mfcc.csv&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">NAMA_FILE_CSV</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data fitur berhasil disimpan ke </span><span class="si">{</span><span class="n">NAMA_FILE_CSV</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Contoh 5 data pertama:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memulai ekstraksi fitur MFCC (n_mfcc=20)...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing buka: 100%|██████████| 100/100 [00:04&lt;00:00, 22.91it/s]
+Processing tutup: 100%|██████████| 100/100 [00:03&lt;00:00, 28.25it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ekstraksi fitur selesai.
+Data fitur berhasil disimpan ke ./dataset/data-hasil/fitur_audio_20mfcc.csv
+
+Contoh 5 data pertama:
+       mfcc_0     mfcc_1     mfcc_2     mfcc_3     mfcc_4     mfcc_5  \
+0 -391.825195  86.733055  21.756060  13.757183   9.030744  12.091555   
+1 -219.554581  95.143524  23.050543  11.273750  12.111441   7.253877   
+2 -231.499649  95.491196  21.786690  16.874832   9.731382  10.766232   
+3 -239.903519  93.402954  20.391285  14.796158   7.593359   8.971307   
+4 -239.522278  96.243011  13.798207  11.316676   9.502037   7.641552   
+
+      mfcc_6    mfcc_7    mfcc_8    mfcc_9  ...   mfcc_11   mfcc_12   mfcc_13  \
+0  12.048173  0.365709  1.737657  5.475190  ... -6.118983 -5.571948 -4.757148   
+1  12.820862 -2.045698 -0.279506  7.276806  ... -7.047171 -9.191520 -6.422854   
+2  14.763392  2.315336  0.482845  3.260504  ... -1.712604 -7.362328 -1.683394   
+3  12.700639 -0.081058  0.001442  4.289254  ... -2.979377 -8.099751 -2.410700   
+4  16.703917  0.591387 -1.314283  5.297466  ... -1.369699 -7.202394 -7.726523   
+
+    mfcc_14   mfcc_15   mfcc_16   mfcc_17   mfcc_18   mfcc_19  label  
+0 -3.288465 -0.071312 -0.128426 -6.077927 -2.441211 -3.030537   buka  
+1 -3.832167 -0.068076 -3.157759 -4.752992 -6.085726 -4.260391   buka  
+2 -0.336681 -2.163007 -2.262357 -2.684976 -4.889982 -5.064355   buka  
+3 -0.211259 -2.033857 -2.743744 -4.011409 -4.766405 -5.796066   buka  
+4  0.504600 -3.000539 -4.273159 -3.424908 -4.315732 -7.084563   buka  
+
+[5 rows x 21 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pelatihan-evaluasi-dan-penyimpanan-model-svc">
+<h2>Pelatihan, Evaluasi, dan Penyimpanan Model (SVC)<a class="headerlink" href="#pelatihan-evaluasi-dan-penyimpanan-model-svc" title="Link to this heading">#</a></h2>
+<p>Cell kode ini adalah alur kerja machine learning lengkap. Tujuannya adalah untuk melatih model klasifikasi, menguji performanya, dan menyimpannya ke disk agar dapat digunakan nanti.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 1. Muat Data ---</span>
+<span class="n">NAMA_FILE_CSV</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/fitur_audio_20mfcc.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">NAMA_FILE_CSV</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data berhasil dimuat:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data berhasil dimuat:
+      mfcc_0     mfcc_1     mfcc_2     mfcc_3     mfcc_4     mfcc_5  \
+0 -391.82520  86.733055  21.756060  13.757183   9.030744  12.091555   
+1 -219.55458  95.143524  23.050543  11.273750  12.111441   7.253877   
+2 -231.49965  95.491196  21.786690  16.874832   9.731382  10.766232   
+3 -239.90352  93.402954  20.391285  14.796158   7.593359   8.971307   
+4 -239.52228  96.243010  13.798207  11.316676   9.502037   7.641552   
+
+      mfcc_6    mfcc_7    mfcc_8    mfcc_9  ...   mfcc_11   mfcc_12   mfcc_13  \
+0  12.048173  0.365709  1.737657  5.475190  ... -6.118983 -5.571948 -4.757148   
+1  12.820862 -2.045698 -0.279506  7.276806  ... -7.047171 -9.191520 -6.422854   
+2  14.763392  2.315336  0.482845  3.260504  ... -1.712604 -7.362328 -1.683394   
+3  12.700639 -0.081058  0.001442  4.289254  ... -2.979377 -8.099751 -2.410700   
+4  16.703917  0.591387 -1.314283  5.297466  ... -1.369699 -7.202394 -7.726523   
+
+    mfcc_14   mfcc_15   mfcc_16   mfcc_17   mfcc_18   mfcc_19  label  
+0 -3.288464 -0.071312 -0.128426 -6.077927 -2.441212 -3.030537   buka  
+1 -3.832167 -0.068076 -3.157759 -4.752992 -6.085726 -4.260391   buka  
+2 -0.336681 -2.163006 -2.262357 -2.684976 -4.889982 -5.064355   buka  
+3 -0.211259 -2.033857 -2.743744 -4.011409 -4.766405 -5.796066   buka  
+4  0.504600 -3.000539 -4.273159 -3.424908 -4.315732 -7.084563   buka  
+
+[5 rows x 21 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 2. Pra-pemrosesan Data ---</span>
+
+<span class="c1"># Pisahkan fitur (X) dan label (y)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Ambil semua kolom kecuali &#39;label&#39;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+
+<span class="c1"># Ubah label &quot;buka&quot; dan &quot;tutup&quot; menjadi angka (misal: 0 dan 1)</span>
+<span class="c1"># Ini WAJIB karena model hanya mengerti angka</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_encoded</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Mari kita lihat kelasnya (0 itu apa, 1 itu apa)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Kelas label: </span><span class="si">{</span><span class="n">encoder</span><span class="o">.</span><span class="n">classes_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Ini akan mencetak sesuatu seperti: [&#39;buka&#39; &#39;tutup&#39;]</span>
+<span class="c1"># Artinya: &#39;buka&#39; = 0, &#39;tutup&#39; = 1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kelas label: [&#39;buka&#39; &#39;tutup&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 3. Bagi Data (Train &amp; Test Split) ---</span>
+<span class="c1"># Kita akan gunakan 80% data untuk melatih model, 20% untuk menguji</span>
+<span class="c1"># stratify=y_encoded: Memastikan proporsi &#39;buka&#39; dan &#39;tutup&#39; seimbang di data latih dan uji</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_encoded</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> 
+                                                    <span class="n">stratify</span><span class="o">=</span><span class="n">y_encoded</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bentuk data latih (X_train): </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bentuk data tes (X_test):   </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bentuk data latih (X_train): (160, 20)
+Bentuk data tes (X_test):   (40, 20)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 4. Buat dan Latih Model ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Memulai pelatihan model SVC...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Kita gunakan SVC (Support Vector Classifier)</span>
+<span class="c1"># kernel=&#39;linear&#39; biasanya bekerja baik untuk data teks/audio</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+
+<span class="c1"># Latih model menggunakan data latih</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pelatihan model selesai.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memulai pelatihan model SVC...
+Pelatihan model selesai.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 5. Evaluasi Model ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Hasil Evaluasi Model ---&quot;</span><span class="p">)</span>
+<span class="c1"># Gunakan model yang sudah dilatih untuk menebak data tes</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Hitung akurasi</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi Model: </span><span class="si">{</span><span class="n">accuracy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan laporan detail (precision, recall, f1-score)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
+
+<span class="c1"># Tampilkan Confusion Matrix</span>
+<span class="c1"># Ini menunjukkan berapa banyak &#39;buka&#39; yang ditebak benar &#39;buka&#39;,</span>
+<span class="c1"># berapa &#39;buka&#39; yang salah tebak jadi &#39;tutup&#39;, dst.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Hasil Evaluasi Model ---
+Akurasi Model: 97.50%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        buka       1.00      0.95      0.97        20
+       tutup       0.95      1.00      0.98        20
+
+    accuracy                           0.97        40
+   macro avg       0.98      0.97      0.97        40
+weighted avg       0.98      0.97      0.97        40
+
+
+Confusion Matrix:
+[[19  1]
+ [ 0 20]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 6. Simpan Model ---</span>
+<span class="c1"># Ini adalah langkah KRUSIAL untuk implementasi Streamlit</span>
+<span class="n">NAMA_FILE_MODEL</span> <span class="o">=</span> <span class="s1">&#39;./dataset/data-hasil/model_audio.pkl&#39;</span>
+<span class="n">NAMA_FILE_ENCODER</span> <span class="o">=</span> <span class="s1">&#39;./dataset/data-hasil/label_encoder.pkl&#39;</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">NAMA_FILE_MODEL</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">NAMA_FILE_ENCODER</span><span class="p">)</span> <span class="c1"># Kita juga simpan encoder-nya!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model berhasil disimpan ke: </span><span class="si">{</span><span class="n">NAMA_FILE_MODEL</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encoder berhasil disimpan ke: </span><span class="si">{</span><span class="n">NAMA_FILE_ENCODER</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model berhasil disimpan ke: ./dataset/data-hasil/model_audio.pkl
+Encoder berhasil disimpan ke: ./dataset/data-hasil/label_encoder.pkl
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Kita sudah punya data X_train, X_test, y_train, y_test dari sel sebelumnya</span>
+
+<span class="c1"># --- 1. Siapkan Model Pembanding ---</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Support Vector Machine (SVC)&quot;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">),</span> <span class="c1"># Model Anda saat ini</span>
+    <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;K-Nearest Neighbors (KNN)&quot;</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Membandingkan Performa Model ---&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 2. Latih dan Evaluasi Setiap Model ---</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Latih model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="c1"># Prediksi data tes</span>
+    <span class="n">y_pred_compare</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="c1"># Hitung akurasi</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_compare</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Akurasi untuk </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">accuracy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># (Opsional) Tampilkan laporan singkat</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;Support Vector Machine (SVC)&quot;</span><span class="p">:</span> <span class="c1"># Kita sudah punya laporan detail SVC</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_compare</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Membandingkan Performa Model ---
+
+Akurasi untuk Support Vector Machine (SVC): 97.50%
+
+Akurasi untuk Random Forest: 97.50%
+              precision    recall  f1-score   support
+
+        buka       0.95      1.00      0.98        20
+       tutup       1.00      0.95      0.97        20
+
+    accuracy                           0.97        40
+   macro avg       0.98      0.97      0.97        40
+weighted avg       0.98      0.97      0.97        40
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d:\Miniforge3\envs\tugaspsd\Lib\site-packages\threadpoolctl.py:1226: RuntimeWarning: 
+Found Intel OpenMP (&#39;libiomp&#39;) and LLVM OpenMP (&#39;libomp&#39;) loaded at
+the same time. Both libraries are known to be incompatible and this
+can cause random crashes or deadlocks on Linux when loaded in the
+same Python program.
+Using threadpoolctl may cause crashes or deadlocks. For more
+information and possible workarounds, please see
+    https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md
+
+  warnings.warn(msg, RuntimeWarning)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi untuk K-Nearest Neighbors (KNN): 97.50%
+              precision    recall  f1-score   support
+
+        buka       1.00      0.95      0.97        20
+       tutup       0.95      1.00      0.98        20
+
+    accuracy                           0.97        40
+   macro avg       0.98      0.97      0.97        40
+weighted avg       0.98      0.97      0.97        40
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="audio.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Klasifikasi Perintah Suara</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="audioDtw.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Audio DTW</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skrip-perekam-data-audio">Skrip Perekam Data Audio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-versi-20-mfcc">Ekstraksi Fitur (Versi 20 MFCC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelatihan-evaluasi-dan-penyimpanan-model-svc">Pelatihan, Evaluasi, dan Penyimpanan Model (SVC)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

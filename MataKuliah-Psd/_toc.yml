@@ -1,0 +1,25 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: businessUnderstanding
+- file: dataUnderstanding
+  sections:
+    - file: explorasiData
+    - file: analisisDataKnime
+- file: dataPreprocessing
+  sections:
+    - file: abod
+    - file: oversampling
+- file: forecasting
+  sections:
+    - file: forecasting2
+    - file: audio
+    - file: audio2
+    - file: audioDtw
+    - file: app
+    - file: timeSeriesSmote
+    - file: random
+

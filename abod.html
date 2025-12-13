@@ -1,0 +1,1009 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Deteksi Outlier ABOD &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'abod';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Oversampling" href="oversampling.html" />
+    <link rel="prev" title="Data Preprocessing" href="dataPreprocessing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Sain Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="businessUnderstanding.html">Business Understanding</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataUnderstanding.html">Data Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="explorasiData.html">Explorasi Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analisisDataKnime.html">Analisa Data &amp; Klasifikasi Tools Knime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="dataPreprocessing.html">Data Preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Deteksi Outlier ABOD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oversampling.html">Oversampling</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="forecasting.html">Forecasting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="forecasting2.html">Forecasting dengan AutoKorelasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio2.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audioDtw.html">Audio DTW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeSeriesSmote.html"><strong>Data Understanding</strong></a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="random.html">File Testing</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fabod.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/abod.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Deteksi Outlier ABOD</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-based-outlier-detection-abod">Angle-Based Outlier Detection (ABOD)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritma-angle-based-outlier-detection-abod">Algoritma Angle-Based Outlier Detection (ABOD)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi">Implementasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-yang-dibutuhkan">Import library yang dibutuhkan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">Load dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-koneksi-engine-dan-mengambil-dari-database">Membuat koneksi (engine) dan mengambil dari database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengabungkan-2-database">Mengabungkan 2 database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salinan-data">Salinan data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-abod">Model ABOD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-data-dengan-skor-outlier-tertinggi">Menghapus data dengan skor outlier tertinggi</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="deteksi-outlier-abod">
+<h1>Deteksi Outlier ABOD<a class="headerlink" href="#deteksi-outlier-abod" title="Link to this heading">#</a></h1>
+<section id="angle-based-outlier-detection-abod">
+<h2>Angle-Based Outlier Detection (ABOD)<a class="headerlink" href="#angle-based-outlier-detection-abod" title="Link to this heading">#</a></h2>
+<p>Angle-Based Outlier Detection (ABOD) adalah pendekatan geometris untuk mengidentifikasi outlier dalam data berdimensi tinggi dengan menganalisis varians sudut yang dibentuk oleh vektor-vektor dari suatu titik ke tetangganya.</p>
+<p>Dalam satu himpunan data, titik-titik normal cenderung memiliki sudut-sudut yang serupa antara pasangan vektor yang menghubungkannya ke titik lain. Sebaliknya, outlier sering kali terletak di tepi dan membentuk rentang sudut yang sangat luas terhadap tetangganya — artinya, varians sudut mereka tinggi.</p>
+</section>
+<section id="algoritma-angle-based-outlier-detection-abod">
+<h2>Algoritma Angle-Based Outlier Detection (ABOD)<a class="headerlink" href="#algoritma-angle-based-outlier-detection-abod" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Untuk setiap titik ( p_i ) dalam dataset:</p>
+<ul class="simple">
+<li><p>Hitung semua vektor pasangan dari ( p_i ) ke titik lainnya:<br />
+$<span class="math notranslate nohighlight">\(
+\vec{v}_{ij} = p_j - p_i
+\)</span>$</p></li>
+<li><p>Untuk setiap pasangan vektor seperti <span class="math notranslate nohighlight">\(((\vec{v}_{ij}, \vec{v}_{ik})\)</span> , hitung sudut di antara keduanya menggunakan rumus hasil kali titik:<br />
+$<span class="math notranslate nohighlight">\(
+\cos(\theta_{ijk}) = \frac{\vec{v}_{ij} \cdot \vec{v}_{ik}}{\|\vec{v}_{ij}\| \cdot \|\vec{v}_{ik}\|}
+\)</span>$</p></li>
+<li><p>Hitung <strong>varians</strong> dari semua sudut tersebut untuk titik ( p_i ).</p></li>
+</ul>
+</li>
+<li><p>Skor outlier untuk titik <span class="math notranslate nohighlight">\( p_i \)</span> adalah varians sudut:<br />
+$<span class="math notranslate nohighlight">\(
+ABOD(p_i) = \mathrm{Var}(\theta_{ijk}) \quad \text{untuk semua } j, k \neq i
+\)</span>$</p></li>
+<li><p>Titik-titik dengan <strong>varians sudut tinggi</strong> ditandai sebagai <strong>outlier</strong>.</p></li>
+</ol>
+</section>
+<section id="implementasi">
+<h2>Implementasi<a class="headerlink" href="#implementasi" title="Link to this heading">#</a></h2>
+<section id="import-library-yang-dibutuhkan">
+<h3>Import library yang dibutuhkan<a class="headerlink" href="#import-library-yang-dibutuhkan" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-dataset">
+<h3>Load dataset<a class="headerlink" href="#load-dataset" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># Ambil variabel dari .env</span>
+<span class="n">user_postgres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;USER_POSTGRES&quot;</span><span class="p">)</span>
+<span class="n">password_postgres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PASS_POSTGRES&quot;</span><span class="p">)</span>
+<span class="n">host_postgres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOST_POSTGRES&quot;</span><span class="p">)</span>
+<span class="n">port_postgres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PORT_POSTGRES&quot;</span><span class="p">)</span>
+<span class="n">db_postgres</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DB_POSTGRES&quot;</span><span class="p">)</span>
+
+<span class="n">user_mysql</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;USER_MYSQL&quot;</span><span class="p">)</span>
+<span class="n">password_mysql</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PASS_MYSQL&quot;</span><span class="p">)</span>
+<span class="n">host_mysql</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOST_MYSQL&quot;</span><span class="p">)</span>
+<span class="n">port_mysql</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PORT_MYSQL&quot;</span><span class="p">)</span>
+<span class="n">db_mysql</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DB_MYSQL&quot;</span><span class="p">)</span>
+
+
+<span class="n">postgres_conn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;postgresql+psycopg2://</span><span class="si">{</span><span class="n">user_postgres</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password_postgres</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">host_postgres</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port_postgres</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">db_postgres</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">mysql_conn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;mysql+pymysql://</span><span class="si">{</span><span class="n">user_mysql</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password_mysql</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">host_mysql</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port_mysql</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">db_mysql</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">postgres_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">postgres_conn</span><span class="p">)</span>
+<span class="n">postgres_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">mysql_conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="membuat-koneksi-engine-dan-mengambil-dari-database">
+<h3>Membuat koneksi (engine) dan mengambil dari database<a class="headerlink" href="#membuat-koneksi-engine-dan-mengambil-dari-database" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Engine untuk PostgreSQL</span>
+<span class="n">postgres_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">postgres_conn</span><span class="p">)</span>
+
+<span class="c1"># Engine untuk MySQL</span>
+<span class="n">mysql_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">mysql_conn</span><span class="p">)</span>
+
+
+<span class="c1"># Ambil data dari MySQL</span>
+<span class="n">mysql_df_iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_full&quot;</span><span class="p">,</span> <span class="n">mysql_engine</span><span class="p">)</span>
+
+<span class="c1"># Ambil data dari PostgreSQL</span>
+<span class="n">postgres_df_iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_full&quot;</span><span class="p">,</span> <span class="n">postgres_engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mengabungkan-2-database">
+<h3>Mengabungkan 2 database<a class="headerlink" href="#mengabungkan-2-database" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merge_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mysql_df_iris</span><span class="p">,</span> <span class="n">postgres_df_iris</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">merge_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     id  petal length_x  petal width_x Class_x sepal length_x sepal width_x  \
+0    36             1.2            0.2    None           None          None   
+1    36             1.2            0.2    None           None          None   
+2    37             1.3            0.2    None           None          None   
+3    37             1.3            0.2    None           None          None   
+4    38             1.5            0.1    None           None          None   
+..   ..             ...            ...     ...            ...           ...   
+295  33             NaN            NaN     NaN            NaN           NaN   
+296  34             NaN            NaN     NaN            NaN           NaN   
+297  34             NaN            NaN     NaN            NaN           NaN   
+298  35             NaN            NaN     NaN            NaN           NaN   
+299  35             NaN            NaN     NaN            NaN           NaN   
+
+     sepal length_y  sepal width_y      Class_y  petal length_y  petal width_y  
+0               5.0            3.2         None             NaN            NaN  
+1               5.0            3.2  Iris-setosa             1.2            0.2  
+2               5.5            3.5         None             NaN            NaN  
+3               5.5            3.5  Iris-setosa             1.3            0.2  
+4               4.9            3.1         None             NaN            NaN  
+..              ...            ...          ...             ...            ...  
+295             5.2            4.1  Iris-setosa             1.5            0.1  
+296             5.5            4.2         None             NaN            NaN  
+297             5.5            4.2  Iris-setosa             1.4            0.2  
+298             4.9            3.1         None             NaN            NaN  
+299             4.9            3.1  Iris-setosa             1.5            0.1  
+
+[300 rows x 11 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="salinan-data">
+<h3>Salinan data<a class="headerlink" href="#salinan-data" title="Link to this heading">#</a></h3>
+<p>Buat salinan data dari hasil penggabungan</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_train</span> <span class="o">=</span> <span class="n">merge_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-abod">
+<h3>Model ABOD<a class="headerlink" href="#model-abod" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pycaret.anomaly</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># === 1. Pastikan dataset sudah ada ===</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah baris:&quot;</span><span class="p">,</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah kolom:&quot;</span><span class="p">,</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kolom dataset:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># === 2. Pilih hanya kolom numerik (biar PyCaret tidak error) ===</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">data_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Kolom numerik yang dipakai untuk anomaly detection:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">fitur</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+
+<span class="c1"># === 3. Setup PyCaret Anomaly Detection (versi terbaru) ===</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pycaret.anomaly</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">create_model</span><span class="p">,</span> <span class="n">assign_model</span>
+<span class="n">exp_ano</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fitur</span><span class="p">,</span>
+    <span class="n">session_id</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># === 4. Buat model ABOD ===</span>
+<span class="n">abod_model</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span><span class="s1">&#39;abod&#39;</span><span class="p">)</span>
+
+<span class="c1"># === 5. Assign label anomaly ===</span>
+<span class="n">dataset_outliers</span> <span class="o">=</span> <span class="n">assign_model</span><span class="p">(</span><span class="n">abod_model</span><span class="p">)</span>
+
+<span class="c1"># === 6. Hapus baris outlier (Anomaly == 1 artinya normal, -1 artinya outlier) ===</span>
+<span class="n">dataset_clean</span> <span class="o">=</span> <span class="n">dataset_outliers</span><span class="p">[</span><span class="n">dataset_outliers</span><span class="p">[</span><span class="s1">&#39;Anomaly&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data awal:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_outliers</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data setelah outlier dihapus:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_clean</span><span class="p">))</span>
+<span class="n">dataset_clean</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah baris: 300
+Jumlah kolom: 11
+Kolom dataset: [&#39;id&#39;, &#39;petal length_x&#39;, &#39;petal width_x&#39;, &#39;Class_x&#39;, &#39;sepal length_x&#39;, &#39;sepal width_x&#39;, &#39;sepal length_y&#39;, &#39;sepal width_y&#39;, &#39;Class_y&#39;, &#39;petal length_y&#39;, &#39;petal width_y&#39;]
+   id  petal length_x  petal width_x Class_x sepal length_x sepal width_x  \
+0  36             1.2            0.2    None           None          None   
+1  36             1.2            0.2    None           None          None   
+2  37             1.3            0.2    None           None          None   
+3  37             1.3            0.2    None           None          None   
+4  38             1.5            0.1    None           None          None   
+
+   sepal length_y  sepal width_y      Class_y  petal length_y  petal width_y  
+0             5.0            3.2         None             NaN            NaN  
+1             5.0            3.2  Iris-setosa             1.2            0.2  
+2             5.5            3.5         None             NaN            NaN  
+3             5.5            3.5  Iris-setosa             1.3            0.2  
+4             4.9            3.1         None             NaN            NaN  
+
+Kolom numerik yang dipakai untuk anomaly detection: [&#39;id&#39;, &#39;petal length_x&#39;, &#39;petal width_x&#39;, &#39;sepal length_y&#39;, &#39;sepal width_y&#39;, &#39;petal length_y&#39;, &#39;petal width_y&#39;]
+</pre></div>
+</div>
+<div class="output text_html"><style type="text/css">
+#T_48fc0_row5_col1 {
+  background-color: lightgreen;
+}
+</style>
+<table id="T_48fc0">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_48fc0_level0_col0" class="col_heading level0 col0" >Description</th>
+      <th id="T_48fc0_level0_col1" class="col_heading level0 col1" >Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_48fc0_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_48fc0_row0_col0" class="data row0 col0" >Session id</td>
+      <td id="T_48fc0_row0_col1" class="data row0 col1" >42</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_48fc0_row1_col0" class="data row1 col0" >Original data shape</td>
+      <td id="T_48fc0_row1_col1" class="data row1 col1" >(300, 7)</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_48fc0_row2_col0" class="data row2 col0" >Transformed data shape</td>
+      <td id="T_48fc0_row2_col1" class="data row2 col1" >(300, 7)</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_48fc0_row3_col0" class="data row3 col0" >Numeric features</td>
+      <td id="T_48fc0_row3_col1" class="data row3 col1" >7</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_48fc0_row4_col0" class="data row4 col0" >Rows with missing values</td>
+      <td id="T_48fc0_row4_col1" class="data row4 col1" >61.7%</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_48fc0_row5_col0" class="data row5 col0" >Preprocess</td>
+      <td id="T_48fc0_row5_col1" class="data row5 col1" >True</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_48fc0_row6_col0" class="data row6 col0" >Imputation type</td>
+      <td id="T_48fc0_row6_col1" class="data row6 col1" >simple</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_48fc0_row7_col0" class="data row7 col0" >Numeric imputation</td>
+      <td id="T_48fc0_row7_col1" class="data row7 col1" >mean</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_48fc0_row8_col0" class="data row8 col0" >Categorical imputation</td>
+      <td id="T_48fc0_row8_col1" class="data row8 col1" >mode</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_48fc0_row9_col0" class="data row9 col0" >CPU Jobs</td>
+      <td id="T_48fc0_row9_col1" class="data row9 col1" >-1</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row10" class="row_heading level0 row10" >10</th>
+      <td id="T_48fc0_row10_col0" class="data row10 col0" >Use GPU</td>
+      <td id="T_48fc0_row10_col1" class="data row10 col1" >False</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row11" class="row_heading level0 row11" >11</th>
+      <td id="T_48fc0_row11_col0" class="data row11 col0" >Log Experiment</td>
+      <td id="T_48fc0_row11_col1" class="data row11 col1" >False</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row12" class="row_heading level0 row12" >12</th>
+      <td id="T_48fc0_row12_col0" class="data row12 col0" >Experiment Name</td>
+      <td id="T_48fc0_row12_col1" class="data row12 col1" >anomaly-default-name</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row13" class="row_heading level0 row13" >13</th>
+      <td id="T_48fc0_row13_col0" class="data row13 col0" >USI</td>
+      <td id="T_48fc0_row13_col1" class="data row13 col1" >a7af</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="output text_html"></div><div class="output text_html"></div><div class="output text_html"></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah data awal: 300
+Jumlah data setelah outlier dihapus: 15
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>petal length_x</th>
+      <th>petal width_x</th>
+      <th>sepal length_y</th>
+      <th>sepal width_y</th>
+      <th>petal length_y</th>
+      <th>petal width_y</th>
+      <th>Anomaly</th>
+      <th>Anomaly_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>71</th>
+      <td>71</td>
+      <td>4.8</td>
+      <td>1.8</td>
+      <td>5.9</td>
+      <td>3.2</td>
+      <td>4.8</td>
+      <td>1.8</td>
+      <td>1</td>
+      <td>-0.005639</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>101</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>6.3</td>
+      <td>3.3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>-0.005653</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>101</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>6.3</td>
+      <td>3.3</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>1</td>
+      <td>-0.001771</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>107</td>
+      <td>4.5</td>
+      <td>1.7</td>
+      <td>4.9</td>
+      <td>2.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>-0.001474</td>
+    </tr>
+    <tr>
+      <th>164</th>
+      <td>118</td>
+      <td>6.7</td>
+      <td>2.2</td>
+      <td>7.7</td>
+      <td>3.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>-0.004842</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="menghapus-data-dengan-skor-outlier-tertinggi">
+<h3>Menghapus data dengan skor outlier tertinggi<a class="headerlink" href="#menghapus-data-dengan-skor-outlier-tertinggi" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Urutkan dataset_outliers berdasarkan skor outlier (descending)</span>
+<span class="n">outliers_sorted</span> <span class="o">=</span> <span class="n">dataset_outliers</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Anomaly_Score&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Ambil index 2 skor outlier tertinggi</span>
+<span class="n">top2_outliers_index</span> <span class="o">=</span> <span class="n">outliers_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># Hapus 2 data tersebut dari dataset_outliers</span>
+<span class="n">dataset_clean_top2</span> <span class="o">=</span> <span class="n">dataset_outliers</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">top2_outliers_index</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data setelah 2 outlier tertinggi dihapus:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset_clean_top2</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data setelah 2 outlier tertinggi dihapus:
+   id  petal length_x  petal width_x  sepal length_y  sepal width_y  \
+0  36             1.2            0.2             5.0            3.2   
+1  36             1.2            0.2             5.0            3.2   
+2  37             1.3            0.2             5.5            3.5   
+3  37             1.3            0.2             5.5            3.5   
+4  38             1.5            0.1             4.9            3.1   
+
+   petal length_y  petal width_y  Anomaly  Anomaly_Score  
+0             NaN            NaN        0      -0.011465  
+1             1.2            0.2        0      -0.010103  
+2             NaN            NaN        0      -0.025892  
+3             1.3            0.2        0      -0.024060  
+4             NaN            NaN        0      -0.082164  
+</pre></div>
+</div>
+</div>
+</div>
+<p>ok</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dataPreprocessing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Preprocessing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="oversampling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Oversampling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-based-outlier-detection-abod">Angle-Based Outlier Detection (ABOD)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritma-angle-based-outlier-detection-abod">Algoritma Angle-Based Outlier Detection (ABOD)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi">Implementasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-yang-dibutuhkan">Import library yang dibutuhkan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">Load dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-koneksi-engine-dan-mengambil-dari-database">Membuat koneksi (engine) dan mengambil dari database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengabungkan-2-database">Mengabungkan 2 database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salinan-data">Salinan data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-abod">Model ABOD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-data-dengan-skor-outlier-tertinggi">Menghapus data dengan skor outlier tertinggi</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
