@@ -1,0 +1,1131 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Audio DTW &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'audioDtw';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Understanding" href="timeSeriesSmote.html" />
+    <link rel="prev" title="Klasifikasi Perintah Suara" href="audio2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Sain Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="businessUnderstanding.html">Business Understanding</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataUnderstanding.html">Data Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="explorasiData.html">Explorasi Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analisisDataKnime.html">Analisa Data &amp; Klasifikasi Tools Knime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataPreprocessing.html">Data Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="abod.html">Deteksi Outlier ABOD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oversampling.html">Oversampling</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="forecasting.html">Forecasting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="forecasting2.html">Forecasting dengan AutoKorelasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio2.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Audio DTW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeSeriesSmote.html"><strong>Data Understanding</strong></a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FaudioDtw.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/audioDtw.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Audio DTW</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="audio-dtw">
+<h1>Audio DTW<a class="headerlink" href="#audio-dtw" title="Link to this heading">#</a></h1>
+<section id="import-library">
+<h2>Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h2>
+<p>Cell ini berfungsi untuk mengimpor semua library Python yang diperlukan untuk proyek ini, seperti <code class="docutils literal notranslate"><span class="pre">librosa</span></code> untuk analisis audio, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dan <code class="docutils literal notranslate"><span class="pre">numpy</span></code> untuk manipulasi data, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> untuk visualisasi, dan <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> untuk pemodelan machine learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sounddevice</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.io.wavfile</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wav</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sounddevice</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.io.wavfile</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wav</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sounddevice&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+
+<span class="c1"># --- Mari kita visualisasikan 1 sampel &quot;BUKA&quot; dan 1 sampel &quot;TUTUP&quot; ---</span>
+
+<span class="c1"># Tentukan path ke data Anda</span>
+<span class="n">PATH_DATA</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/&quot;</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>
+
+<span class="c1"># Ambil 1 contoh file</span>
+<span class="n">file_buka</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATA</span><span class="p">,</span> <span class="s2">&quot;buka&quot;</span><span class="p">,</span> <span class="s2">&quot;buka_001.wav&quot;</span><span class="p">)</span>
+<span class="n">file_tutup</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATA</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">,</span> <span class="s2">&quot;tutup_001.wav&quot;</span><span class="p">)</span>
+
+<span class="c1"># Muat file audio</span>
+<span class="n">y_buka</span><span class="p">,</span> <span class="n">sr_buka</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+<span class="n">y_tutup</span><span class="p">,</span> <span class="n">sr_tutup</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+
+<span class="c1"># --- Plotting ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># 1. Plot Waveform BUKA</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span><span class="n">y_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_buka</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Waveform: BUKA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitudo&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Plot Waveform TUTUP</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span><span class="n">y_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_tutup</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Waveform: TUTUP&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitudo&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Plot Mel Spectrogram BUKA</span>
+<span class="c1"># Spectrogram lebih baik dalam menunjukkan &#39;karakter&#39; suara</span>
+<span class="n">S_buka</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_buka</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">S_db_buka</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S_buka</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">S_db_buka</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_buka</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mel Spectrogram: BUKA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frekuensi (Mel)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Waktu (detik)&#39;</span><span class="p">)</span>
+
+<span class="c1"># 4. Plot Mel Spectrogram TUTUP</span>
+<span class="n">S_tutup</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_tutup</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">S_db_tutup</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S_tutup</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">S_db_tutup</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr_tutup</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mel Spectrogram: TUTUP&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frekuensi (Mel)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Waktu (detik)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9a5348dd5b6ffa54f29a609698023baeb63efd1d037308607e27635cfd63e0e0.png" src="_images/9a5348dd5b6ffa54f29a609698023baeb63efd1d037308607e27635cfd63e0e0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># --- KONFIGURASI ---</span>
+<span class="n">PATH_DATA</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/&quot;</span>  <span class="c1"># Pastikan folder ini ada isinya</span>
+<span class="n">LABELS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;buka&quot;</span><span class="p">,</span> <span class="s2">&quot;tutup&quot;</span><span class="p">]</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>
+<span class="n">N_MFCC</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Kita ingin 20 angka per audio</span>
+
+<span class="n">data_fitur</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sedang membaca data dan mengubah menjadi angka...&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">LABELS</span><span class="p">:</span>
+    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATA</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    
+    <span class="c1"># Cek apakah folder ada</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Folder </span><span class="si">{</span><span class="n">folder_path</span><span class="si">}</span><span class="s2"> tidak ditemukan!&quot;</span><span class="p">)</span>
+        <span class="k">continue</span>
+
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.wav&#39;</span><span class="p">)]</span>
+    
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        
+        <span class="c1"># 1. BACA AUDIO (MENGHASILKAN ARRAY RIBUAN ANGKA)</span>
+        <span class="c1"># y = array amplitudo suara, sr = sampling rate</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+        
+        <span class="c1"># 2. UBAH JADI MFCC (MENGHASILKAN MATRIX FITUR)</span>
+        <span class="n">mfccs</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="n">N_MFCC</span><span class="p">)</span>
+        
+        <span class="c1"># 3. RATA-RATA (MENGHASILKAN 20 ANGKA FINAL)</span>
+        <span class="c1"># Kita ambil rata-rata agar setiap audio punya jumlah fitur yang sama</span>
+        <span class="n">mfccs_rata_rata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mfccs</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1"># Simpan ke list sementara</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s1">&#39;mfcc_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">mfccs_rata_rata</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_MFCC</span><span class="p">)}</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;nama_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_name</span>
+        <span class="n">data_fitur</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># --- MENAMPILKAN HASIL ---</span>
+<span class="n">df_angka</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_fitur</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bentuk Angka dari Dataset Audio Anda:&quot;</span><span class="p">)</span>
+<span class="c1"># Tampilkan 5 baris pertama</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_angka</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Tampilkan info ukuran data</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total Data: </span><span class="si">{</span><span class="n">df_angka</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> baris&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Fitur (Kolom Angka): </span><span class="si">{</span><span class="n">N_MFCC</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sedang membaca data dan mengubah menjadi angka...
+
+Bentuk Angka dari Dataset Audio Anda:
+       mfcc_0     mfcc_1     mfcc_2     mfcc_3     mfcc_4     mfcc_5  \
+0 -391.825195  86.733055  21.756060  13.757183   9.030744  12.091555   
+1 -219.554581  95.143524  23.050543  11.273750  12.111441   7.253877   
+2 -231.499649  95.491196  21.786690  16.874832   9.731382  10.766232   
+3 -239.903519  93.402954  20.391285  14.796158   7.593359   8.971307   
+4 -239.522278  96.243011  13.798207  11.316676   9.502037   7.641552   
+
+      mfcc_6    mfcc_7    mfcc_8    mfcc_9  ...   mfcc_12   mfcc_13   mfcc_14  \
+0  12.048173  0.365709  1.737657  5.475190  ... -5.571948 -4.757148 -3.288465   
+1  12.820862 -2.045698 -0.279506  7.276806  ... -9.191520 -6.422854 -3.832167   
+2  14.763392  2.315336  0.482845  3.260504  ... -7.362328 -1.683394 -0.336681   
+3  12.700639 -0.081058  0.001442  4.289254  ... -8.099751 -2.410700 -0.211259   
+4  16.703917  0.591387 -1.314283  5.297466  ... -7.202394 -7.726523  0.504600   
+
+    mfcc_15   mfcc_16   mfcc_17   mfcc_18   mfcc_19  label     nama_file  
+0 -0.071312 -0.128426 -6.077927 -2.441211 -3.030537   buka  buka_001.wav  
+1 -0.068076 -3.157759 -4.752992 -6.085726 -4.260391   buka  buka_002.wav  
+2 -2.163007 -2.262357 -2.684976 -4.889982 -5.064355   buka  buka_003.wav  
+3 -2.033857 -2.743744 -4.011409 -4.766405 -5.796066   buka  buka_004.wav  
+4 -3.000539 -4.273159 -3.424908 -4.315732 -7.084563   buka  buka_005.wav  
+
+[5 rows x 22 columns]
+
+Total Data: 200 baris
+Total Fitur (Kolom Angka): 20
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sounddevice</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.io.wavfile</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wav</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- KONFIGURASI ---</span>
+<span class="n">PATH_DATASET_TUTUP</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/tutup/&quot;</span>  <span class="c1"># Folder dataset minggu lalu</span>
+<span class="n">FILE_BARU</span> <span class="o">=</span> <span class="s2">&quot;tutup_test_baru.wav&quot;</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>
+<span class="n">DURASI</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># Detik</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 1. REKAM SUARA BARU</span>
+<span class="c1"># ==========================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rekam_satu_kata</span><span class="p">(</span><span class="n">nama_file</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Merekam Suara Baru &#39;</span><span class="si">{</span><span class="n">nama_file</span><span class="si">}</span><span class="s2">&#39; ---&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bersiap... 3&quot;</span><span class="p">)</span>
+    <span class="n">sd</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+    <span class="n">sd</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+    <span class="n">sd</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BICARA SEKARANG (&#39;TUTUP&#39;)!&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Merekam</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">rec</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">DURASI</span> <span class="o">*</span> <span class="n">SAMPLE_RATE</span><span class="p">),</span> <span class="n">samplerate</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">sd</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selesai Merekam.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Simpan</span>
+    <span class="c1"># Normalisasi agar volume konsisten</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">audio</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">audio</span><span class="p">))</span>
+    <span class="n">audio_int16</span> <span class="o">=</span> <span class="p">(</span><span class="n">audio</span> <span class="o">*</span> <span class="mi">32767</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+    <span class="n">wav</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">nama_file</span><span class="p">,</span> <span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">audio_int16</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File tersimpan: </span><span class="si">{</span><span class="n">nama_file</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Jalankan Perekaman</span>
+<span class="n">rekam_satu_kata</span><span class="p">(</span><span class="n">FILE_BARU</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Merekam Suara Baru &#39;tutup_test_baru.wav&#39; ---
+Bersiap... 3
+2
+1
+BICARA SEKARANG (&#39;TUTUP&#39;)!
+Selesai Merekam.
+File tersimpan: tutup_test_baru.wav
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==========================================</span>
+<span class="c1"># 2. FUNGSI HITUNG DTW</span>
+<span class="c1"># ==========================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hitung_dtw</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="n">file2</span><span class="p">):</span>
+    <span class="c1"># Load Audio</span>
+    <span class="n">y1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+    <span class="n">y2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file2</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+    
+    <span class="c1"># Ekstrak MFCC (Fitur)</span>
+    <span class="c1"># Kita TIDAK merata-rata (mean) di sini, karena DTW butuh urutan waktu</span>
+    <span class="n">mfcc1</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y1</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">mfcc2</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    
+    <span class="c1"># Hitung DTW menggunakan Librosa</span>
+    <span class="c1"># D = Cost Matrix, wp = Warping Path</span>
+    <span class="n">D</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">dtw</span><span class="p">(</span><span class="n">mfcc1</span><span class="p">,</span> <span class="n">mfcc2</span><span class="p">,</span> <span class="n">subseq</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Jarak (Distance) adalah biaya terakumulasi terakhir dibagi panjang path</span>
+    <span class="c1"># Semakin KECIL jaraknya, semakin MIRIP suaranya</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">wp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">mfcc1</span><span class="p">,</span> <span class="n">mfcc2</span><span class="p">,</span> <span class="n">wp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==========================================</span>
+<span class="c1"># 3. BANDINGKAN DENGAN DATASET LAMA</span>
+<span class="c1"># ==========================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sedang membandingkan dengan dataset lama menggunakan DTW...&quot;</span><span class="p">)</span>
+
+<span class="n">hasil_perbandingan</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Cek apakah folder dataset ada</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">PATH_DATASET_TUTUP</span><span class="p">):</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">PATH_DATASET_TUTUP</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.wav&#39;</span><span class="p">)]</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">files</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Folder dataset kosong!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">file_lama</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">path_file_lama</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATASET_TUTUP</span><span class="p">,</span> <span class="n">file_lama</span><span class="p">)</span>
+            
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Hitung Jarak DTW</span>
+                <span class="n">jarak</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">hitung_dtw</span><span class="p">(</span><span class="n">FILE_BARU</span><span class="p">,</span> <span class="n">path_file_lama</span><span class="p">)</span>
+                
+                <span class="n">hasil_perbandingan</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="n">file_lama</span><span class="p">,</span>
+                    <span class="s1">&#39;jarak_dtw&#39;</span><span class="p">:</span> <span class="n">jarak</span>
+                <span class="p">})</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak vs </span><span class="si">{</span><span class="n">file_lama</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">jarak</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gagal memproses </span><span class="si">{</span><span class="n">file_lama</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># --- HASIL AKHIR ---</span>
+        <span class="c1"># Urutkan dari jarak terkecil (Paling Mirip)</span>
+        <span class="n">hasil_perbandingan</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;jarak_dtw&#39;</span><span class="p">])</span>
+        
+        <span class="n">terbaik</span> <span class="o">=</span> <span class="n">hasil_perbandingan</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HASIL ANALISIS DTW&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File Rekaman Baru: </span><span class="si">{</span><span class="n">FILE_BARU</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Paling Mirip dengan: </span><span class="si">{</span><span class="n">terbaik</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skor Jarak DTW: </span><span class="si">{</span><span class="n">terbaik</span><span class="p">[</span><span class="s1">&#39;jarak_dtw&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (Semakin kecil semakin mirip)&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># --- VISUALISASI DTW (Opsional) ---</span>
+        <span class="c1"># Kita plot warping path antara rekaman baru vs file terbaik</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Menampilkan Visualisasi Warping Path...&quot;</span><span class="p">)</span>
+        <span class="n">dist</span><span class="p">,</span> <span class="n">mfcc_baru</span><span class="p">,</span> <span class="n">mfcc_best</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">hitung_dtw</span><span class="p">(</span><span class="n">FILE_BARU</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PATH_DATASET_TUTUP</span><span class="p">,</span> <span class="n">terbaik</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]))</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        
+        <span class="c1"># Plot Matriks Biaya &amp; Jalur</span>
+        <span class="c1"># Sumbu X = Waktu File Lama, Sumbu Y = Waktu File Baru</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">dtw</span><span class="p">(</span><span class="n">mfcc_baru</span><span class="p">,</span> <span class="n">mfcc_best</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;frames&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;frames&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wp</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">wp</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Optimal Path&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DTW Path: Rekaman Baru vs </span><span class="si">{</span><span class="n">terbaik</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Folder </span><span class="si">{</span><span class="n">PATH_DATASET_TUTUP</span><span class="si">}</span><span class="s2"> tidak ditemukan. Pastikan path sesuai!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sedang membandingkan dengan dataset lama menggunakan DTW...
+Jarak vs tutup_001.wav: 122.7953
+Jarak vs tutup_002.wav: 108.2975
+Jarak vs tutup_003.wav: 112.6680
+Jarak vs tutup_004.wav: 123.7238
+Jarak vs tutup_005.wav: 141.4895
+Jarak vs tutup_006.wav: 133.7262
+Jarak vs tutup_007.wav: 115.6805
+Jarak vs tutup_008.wav: 130.7670
+Jarak vs tutup_009.wav: 126.3620
+Jarak vs tutup_010.wav: 121.7786
+Jarak vs tutup_011.wav: 131.4484
+Jarak vs tutup_012.wav: 132.0264
+Jarak vs tutup_013.wav: 130.0943
+Jarak vs tutup_014.wav: 130.3142
+Jarak vs tutup_015.wav: 117.7362
+Jarak vs tutup_016.wav: 117.2011
+Jarak vs tutup_017.wav: 122.4018
+Jarak vs tutup_018.wav: 121.2256
+Jarak vs tutup_019.wav: 131.0524
+Jarak vs tutup_020.wav: 143.4121
+Jarak vs tutup_021.wav: 121.7772
+Jarak vs tutup_022.wav: 125.4767
+Jarak vs tutup_023.wav: 125.8379
+Jarak vs tutup_024.wav: 126.4216
+Jarak vs tutup_025.wav: 122.8212
+Jarak vs tutup_026.wav: 125.0697
+Jarak vs tutup_027.wav: 119.6622
+Jarak vs tutup_028.wav: 119.3150
+Jarak vs tutup_029.wav: 112.1170
+Jarak vs tutup_030.wav: 118.9109
+Jarak vs tutup_031.wav: 125.1435
+Jarak vs tutup_032.wav: 119.9607
+Jarak vs tutup_033.wav: 137.0990
+Jarak vs tutup_034.wav: 129.0025
+Jarak vs tutup_035.wav: 127.0877
+Jarak vs tutup_036.wav: 131.8728
+Jarak vs tutup_037.wav: 128.2608
+Jarak vs tutup_038.wav: 120.0311
+Jarak vs tutup_039.wav: 119.0669
+Jarak vs tutup_040.wav: 122.4460
+Jarak vs tutup_041.wav: 121.1894
+Jarak vs tutup_042.wav: 129.7408
+Jarak vs tutup_043.wav: 127.7013
+Jarak vs tutup_044.wav: 131.8507
+Jarak vs tutup_045.wav: 121.9856
+Jarak vs tutup_046.wav: 114.4023
+Jarak vs tutup_047.wav: 127.3918
+Jarak vs tutup_048.wav: 120.3708
+Jarak vs tutup_049.wav: 127.3591
+Jarak vs tutup_050.wav: 130.1222
+Jarak vs tutup_051.wav: 121.5017
+Jarak vs tutup_052.wav: 116.8001
+Jarak vs tutup_053.wav: 110.1332
+Jarak vs tutup_054.wav: 132.7278
+Jarak vs tutup_055.wav: 123.1424
+Jarak vs tutup_056.wav: 140.0410
+Jarak vs tutup_057.wav: 129.4151
+Jarak vs tutup_058.wav: 127.6124
+Jarak vs tutup_059.wav: 120.0294
+Jarak vs tutup_060.wav: 110.5883
+Jarak vs tutup_061.wav: 122.5671
+Jarak vs tutup_062.wav: 120.8625
+Jarak vs tutup_063.wav: 307.9133
+Jarak vs tutup_064.wav: 137.4634
+Jarak vs tutup_065.wav: 119.0222
+Jarak vs tutup_066.wav: 121.1278
+Jarak vs tutup_067.wav: 132.3282
+Jarak vs tutup_068.wav: 132.1916
+Jarak vs tutup_069.wav: 139.1075
+Jarak vs tutup_070.wav: 134.9769
+Jarak vs tutup_071.wav: 100.9300
+Jarak vs tutup_072.wav: 120.2711
+Jarak vs tutup_073.wav: 115.7696
+Jarak vs tutup_074.wav: 130.4073
+Jarak vs tutup_075.wav: 122.4291
+Jarak vs tutup_076.wav: 123.3609
+Jarak vs tutup_077.wav: 133.1784
+Jarak vs tutup_078.wav: 140.7874
+Jarak vs tutup_079.wav: 119.6553
+Jarak vs tutup_080.wav: 126.0237
+Jarak vs tutup_081.wav: 132.9009
+Jarak vs tutup_082.wav: 140.4790
+Jarak vs tutup_083.wav: 131.9791
+Jarak vs tutup_084.wav: 131.1463
+Jarak vs tutup_085.wav: 129.8368
+Jarak vs tutup_086.wav: 126.5651
+Jarak vs tutup_087.wav: 123.9141
+Jarak vs tutup_088.wav: 124.3003
+Jarak vs tutup_089.wav: 117.2702
+Jarak vs tutup_090.wav: 132.1984
+Jarak vs tutup_091.wav: 123.0133
+Jarak vs tutup_092.wav: 135.7995
+Jarak vs tutup_093.wav: 130.6034
+Jarak vs tutup_094.wav: 126.0420
+Jarak vs tutup_095.wav: 131.8012
+Jarak vs tutup_096.wav: 124.0142
+Jarak vs tutup_097.wav: 133.3159
+Jarak vs tutup_098.wav: 131.4966
+Jarak vs tutup_099.wav: 128.1317
+Jarak vs tutup_100.wav: 129.5674
+
+========================================
+HASIL ANALISIS DTW
+========================================
+File Rekaman Baru: tutup_test_baru.wav
+Paling Mirip dengan: tutup_071.wav
+Skor Jarak DTW: 100.9300 (Semakin kecil semakin mirip)
+
+Menampilkan Visualisasi Warping Path...
+</pre></div>
+</div>
+<img alt="_images/9eeedeb45eb326a46604c6e60efc3f1ed51675c24cc965d061c6a7cf7eaf09fd.png" src="_images/9eeedeb45eb326a46604c6e60efc3f1ed51675c24cc965d061c6a7cf7eaf09fd.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+
+<span class="c1"># --- KONFIGURASI ---</span>
+<span class="n">FOLDER_DATASET_LAMA</span> <span class="o">=</span> <span class="s2">&quot;./dataset/data-hasil/tutup/&quot;</span> <span class="c1"># Folder dataset lama</span>
+<span class="n">FILE_BARU</span> <span class="o">=</span> <span class="s2">&quot;tutup_test_baru.wav&quot;</span>                   <span class="c1"># File yang baru direkam</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">22050</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hitung_jarak_dtw</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="n">file2</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 1. Load Audio</span>
+        <span class="n">y1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+        <span class="n">y2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file2</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+
+        <span class="c1"># 2. Ekstrak Fitur (MFCC)</span>
+        <span class="c1"># Penting: Jangan dirata-rata (mean), kita butuh urutan waktunya</span>
+        <span class="n">mfcc1</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y1</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+        <span class="n">mfcc2</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+        <span class="c1"># 3. Hitung DTW</span>
+        <span class="c1"># Menggunakan subsequence=True agar lebih fleksibel terhadap durasi</span>
+        <span class="n">D</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">dtw</span><span class="p">(</span><span class="n">mfcc1</span><span class="p">,</span> <span class="n">mfcc2</span><span class="p">,</span> <span class="n">subseq</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># 4. Hitung Skor Normalisasi</span>
+        <span class="c1"># Biaya total dibagi panjang jalur agar adil</span>
+        <span class="n">jarak</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">wp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="n">jarak</span><span class="p">,</span> <span class="n">mfcc1</span><span class="p">,</span> <span class="n">mfcc2</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">D</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gagal memproses </span><span class="si">{</span><span class="n">file2</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+<span class="c1"># --- PROSES UTAMA ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sedang membandingkan &#39;</span><span class="si">{</span><span class="n">FILE_BARU</span><span class="si">}</span><span class="s2">&#39; dengan seluruh dataset di &#39;</span><span class="si">{</span><span class="n">FOLDER_DATASET_LAMA</span><span class="si">}</span><span class="s2">&#39;...&quot;</span><span class="p">)</span>
+
+<span class="n">hasil_analisis</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">FOLDER_DATASET_LAMA</span><span class="p">):</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">FOLDER_DATASET_LAMA</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.wav&#39;</span><span class="p">)]</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">files</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Folder dataset kosong!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Loop semua file lama</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file_lama</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+            <span class="n">path_file_lama</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FOLDER_DATASET_LAMA</span><span class="p">,</span> <span class="n">file_lama</span><span class="p">)</span>
+            
+            <span class="c1"># Hitung DTW</span>
+            <span class="n">jarak</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">hitung_jarak_dtw</span><span class="p">(</span><span class="n">FILE_BARU</span><span class="p">,</span> <span class="n">path_file_lama</span><span class="p">)</span>
+            
+            <span class="c1"># Simpan hasil</span>
+            <span class="n">hasil_analisis</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;File Lama&quot;</span><span class="p">:</span> <span class="n">file_lama</span><span class="p">,</span>
+                <span class="s2">&quot;Jarak DTW&quot;</span><span class="p">:</span> <span class="n">jarak</span>
+            <span class="p">})</span>
+            
+            <span class="c1"># Print progress setiap 10 file</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memproses </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2"> data...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># --- MEMBUAT PERINGKAT ---</span>
+        <span class="c1"># Urutkan dari jarak terkecil (Paling Mirip) ke terbesar</span>
+        <span class="n">df_hasil</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">hasil_analisis</span><span class="p">)</span>
+        <span class="n">df_hasil</span> <span class="o">=</span> <span class="n">df_hasil</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Jarak DTW&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Tampilkan Top 10 Paling Mirip</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TOP 10 SUARA PALING MIRIP (Jarak Terkecil)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df_hasil</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+        
+        <span class="c1"># --- VISUALISASI PEMENANG ---</span>
+        <span class="c1"># Kita ambil juara 1 (index 0) untuk divisualisasikan</span>
+        <span class="n">juara_file</span> <span class="o">=</span> <span class="n">df_hasil</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;File Lama&quot;</span><span class="p">]</span>
+        <span class="n">juara_jarak</span> <span class="o">=</span> <span class="n">df_hasil</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Jarak DTW&quot;</span><span class="p">]</span>
+        <span class="n">path_juara</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FOLDER_DATASET_LAMA</span><span class="p">,</span> <span class="n">juara_file</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt; Visualisasi Juara 1: </span><span class="si">{</span><span class="n">juara_file</span><span class="si">}</span><span class="s2"> (Skor: </span><span class="si">{</span><span class="n">juara_jarak</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Hitung ulang DTW untuk plotting</span>
+        <span class="n">dist</span><span class="p">,</span> <span class="n">mfcc_baru</span><span class="p">,</span> <span class="n">mfcc_juara</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">hitung_jarak_dtw</span><span class="p">(</span><span class="n">FILE_BARU</span><span class="p">,</span> <span class="n">path_juara</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        
+        <span class="c1"># Plot Cost Matrix</span>
+        <span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;frames&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;frames&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wp</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">wp</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Warping Path&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DTW Path: Rekaman Baru vs </span><span class="si">{</span><span class="n">juara_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frame Suara Juara (Lama)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frame Suara Baru&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Folder dataset tidak ditemukan!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sedang membandingkan &#39;tutup_test_baru.wav&#39; dengan seluruh dataset di &#39;./dataset/data-hasil/tutup/&#39;...
+Memproses 10/100 data...
+Memproses 20/100 data...
+Memproses 30/100 data...
+Memproses 40/100 data...
+Memproses 50/100 data...
+Memproses 60/100 data...
+Memproses 70/100 data...
+Memproses 80/100 data...
+Memproses 90/100 data...
+Memproses 100/100 data...
+
+========================================
+TOP 10 SUARA PALING MIRIP (Jarak Terkecil)
+========================================
+       File Lama   Jarak DTW
+0  tutup_071.wav  100.930009
+1  tutup_002.wav  108.297542
+2  tutup_053.wav  110.133154
+3  tutup_060.wav  110.588276
+4  tutup_029.wav  112.117029
+5  tutup_003.wav  112.668010
+6  tutup_046.wav  114.402325
+7  tutup_007.wav  115.680513
+8  tutup_073.wav  115.769568
+9  tutup_052.wav  116.800104
+
+&gt;&gt;&gt; Visualisasi Juara 1: tutup_071.wav (Skor: 100.9300)
+</pre></div>
+</div>
+<img alt="_images/3bcdbc96341172c207caecc1e5565bdb7b7f2efc061bc9627f5550806b4878cf.png" src="_images/3bcdbc96341172c207caecc1e5565bdb7b7f2efc061bc9627f5550806b4878cf.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="audio2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Klasifikasi Perintah Suara</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="timeSeriesSmote.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Data Understanding</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'abod';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Oversampling" href="oversampling.html" />
     <link rel="prev" title="Data Preprocessing" href="dataPreprocessing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,10 +185,26 @@
 <li class="toctree-l1"><a class="reference internal" href="businessUnderstanding.html">Business Understanding</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dataUnderstanding.html">Data Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="explorasiData.html">Explorasi Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analisisDataKnime.html">Analisa Data &amp; Klasifikasi Tools Knime</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="dataPreprocessing.html">Data Preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Deteksi Outlier ABOD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oversampling.html">Oversampling</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="forecasting.html">Forecasting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="forecasting2.html">Forecasting dengan AutoKorelasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio2.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audioDtw.html">Audio DTW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeSeriesSmote.html"><strong>Data Understanding</strong></a></li>
+
+
+
+
 </ul>
 </details></li>
 </ul>
@@ -451,6 +468,19 @@ ABOD(p_i) = \mathrm{Var}(\theta_{ijk}) \quad \text{untuk semua } j, k \neq i
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="load-dataset">
@@ -597,6 +627,210 @@ ABOD(p_i) = \mathrm{Var}(\theta_{ijk}) \quad \text{untuk semua } j, k \neq i
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah baris: 300
+Jumlah kolom: 11
+Kolom dataset: [&#39;id&#39;, &#39;petal length_x&#39;, &#39;petal width_x&#39;, &#39;Class_x&#39;, &#39;sepal length_x&#39;, &#39;sepal width_x&#39;, &#39;sepal length_y&#39;, &#39;sepal width_y&#39;, &#39;Class_y&#39;, &#39;petal length_y&#39;, &#39;petal width_y&#39;]
+   id  petal length_x  petal width_x Class_x sepal length_x sepal width_x  \
+0  36             1.2            0.2    None           None          None   
+1  36             1.2            0.2    None           None          None   
+2  37             1.3            0.2    None           None          None   
+3  37             1.3            0.2    None           None          None   
+4  38             1.5            0.1    None           None          None   
+
+   sepal length_y  sepal width_y      Class_y  petal length_y  petal width_y  
+0             5.0            3.2         None             NaN            NaN  
+1             5.0            3.2  Iris-setosa             1.2            0.2  
+2             5.5            3.5         None             NaN            NaN  
+3             5.5            3.5  Iris-setosa             1.3            0.2  
+4             4.9            3.1         None             NaN            NaN  
+
+Kolom numerik yang dipakai untuk anomaly detection: [&#39;id&#39;, &#39;petal length_x&#39;, &#39;petal width_x&#39;, &#39;sepal length_y&#39;, &#39;sepal width_y&#39;, &#39;petal length_y&#39;, &#39;petal width_y&#39;]
+</pre></div>
+</div>
+<div class="output text_html"><style type="text/css">
+#T_48fc0_row5_col1 {
+  background-color: lightgreen;
+}
+</style>
+<table id="T_48fc0">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_48fc0_level0_col0" class="col_heading level0 col0" >Description</th>
+      <th id="T_48fc0_level0_col1" class="col_heading level0 col1" >Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_48fc0_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_48fc0_row0_col0" class="data row0 col0" >Session id</td>
+      <td id="T_48fc0_row0_col1" class="data row0 col1" >42</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_48fc0_row1_col0" class="data row1 col0" >Original data shape</td>
+      <td id="T_48fc0_row1_col1" class="data row1 col1" >(300, 7)</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_48fc0_row2_col0" class="data row2 col0" >Transformed data shape</td>
+      <td id="T_48fc0_row2_col1" class="data row2 col1" >(300, 7)</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_48fc0_row3_col0" class="data row3 col0" >Numeric features</td>
+      <td id="T_48fc0_row3_col1" class="data row3 col1" >7</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_48fc0_row4_col0" class="data row4 col0" >Rows with missing values</td>
+      <td id="T_48fc0_row4_col1" class="data row4 col1" >61.7%</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_48fc0_row5_col0" class="data row5 col0" >Preprocess</td>
+      <td id="T_48fc0_row5_col1" class="data row5 col1" >True</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_48fc0_row6_col0" class="data row6 col0" >Imputation type</td>
+      <td id="T_48fc0_row6_col1" class="data row6 col1" >simple</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_48fc0_row7_col0" class="data row7 col0" >Numeric imputation</td>
+      <td id="T_48fc0_row7_col1" class="data row7 col1" >mean</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_48fc0_row8_col0" class="data row8 col0" >Categorical imputation</td>
+      <td id="T_48fc0_row8_col1" class="data row8 col1" >mode</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_48fc0_row9_col0" class="data row9 col0" >CPU Jobs</td>
+      <td id="T_48fc0_row9_col1" class="data row9 col1" >-1</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row10" class="row_heading level0 row10" >10</th>
+      <td id="T_48fc0_row10_col0" class="data row10 col0" >Use GPU</td>
+      <td id="T_48fc0_row10_col1" class="data row10 col1" >False</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row11" class="row_heading level0 row11" >11</th>
+      <td id="T_48fc0_row11_col0" class="data row11 col0" >Log Experiment</td>
+      <td id="T_48fc0_row11_col1" class="data row11 col1" >False</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row12" class="row_heading level0 row12" >12</th>
+      <td id="T_48fc0_row12_col0" class="data row12 col0" >Experiment Name</td>
+      <td id="T_48fc0_row12_col1" class="data row12 col1" >anomaly-default-name</td>
+    </tr>
+    <tr>
+      <th id="T_48fc0_level0_row13" class="row_heading level0 row13" >13</th>
+      <td id="T_48fc0_row13_col0" class="data row13 col0" >USI</td>
+      <td id="T_48fc0_row13_col1" class="data row13 col1" >a7af</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="output text_html"></div><div class="output text_html"></div><div class="output text_html"></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah data awal: 300
+Jumlah data setelah outlier dihapus: 15
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>petal length_x</th>
+      <th>petal width_x</th>
+      <th>sepal length_y</th>
+      <th>sepal width_y</th>
+      <th>petal length_y</th>
+      <th>petal width_y</th>
+      <th>Anomaly</th>
+      <th>Anomaly_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>71</th>
+      <td>71</td>
+      <td>4.8</td>
+      <td>1.8</td>
+      <td>5.9</td>
+      <td>3.2</td>
+      <td>4.8</td>
+      <td>1.8</td>
+      <td>1</td>
+      <td>-0.005639</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>101</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>6.3</td>
+      <td>3.3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>-0.005653</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>101</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>6.3</td>
+      <td>3.3</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>1</td>
+      <td>-0.001771</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>107</td>
+      <td>4.5</td>
+      <td>1.7</td>
+      <td>4.9</td>
+      <td>2.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>-0.001474</td>
+    </tr>
+    <tr>
+      <th>164</th>
+      <td>118</td>
+      <td>6.7</td>
+      <td>2.2</td>
+      <td>7.7</td>
+      <td>3.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>-0.004842</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="menghapus-data-dengan-skor-outlier-tertinggi">
@@ -678,6 +912,15 @@ ABOD(p_i) = \mathrm{Var}(\theta_{ijk}) \quad \text{untuk semua } j, k \neq i
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Data Preprocessing</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="oversampling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Oversampling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

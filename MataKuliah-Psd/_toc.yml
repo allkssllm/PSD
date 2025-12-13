@@ -17,5 +17,8 @@ chapters:
   sections:
     - file: forecasting2
     - file: audio
+    - file: audio2
+    - file: audioDtw
     - file: app
+    - file: timeSeriesSmote
 
