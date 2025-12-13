@@ -21,4 +21,5 @@ chapters:
     - file: audioDtw
     - file: app
     - file: timeSeriesSmote
+    - file: random
 
