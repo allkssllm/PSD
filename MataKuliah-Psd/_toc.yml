@@ -22,4 +22,5 @@ chapters:
     - file: app
     - file: timeSeriesSmote
     - file: random
+- file: uas
 

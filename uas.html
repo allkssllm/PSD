@@ -1,0 +1,2181 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TimeSeries Wafer &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'uas';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Data Understanding" href="timeSeriesSmote.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Sain Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="businessUnderstanding.html">Business Understanding</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataUnderstanding.html">Data Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="explorasiData.html">Explorasi Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analisisDataKnime.html">Analisa Data &amp; Klasifikasi Tools Knime</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dataPreprocessing.html">Data Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="abod.html">Deteksi Outlier ABOD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oversampling.html">Oversampling</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="forecasting.html">Forecasting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="forecasting2.html">Forecasting dengan AutoKorelasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio2.html">Klasifikasi Perintah Suara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audioDtw.html">Audio DTW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeSeriesSmote.html"><strong>Data Understanding</strong></a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">TimeSeries Wafer</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fuas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/uas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TimeSeries Wafer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. Business Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">1.1 Latar Belakang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-bisnis">1.2 Permasalahan Bisnis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">1.3 Tujuan Proyek</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis-data">1.4 Tujuan Analisis Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-keberhasilan">1.5 Kriteria Keberhasilan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tantangan-proyek">1.6 Tantangan Proyek</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">2. Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-dataset">2.1 Deskripsi Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-data">2.2 Karakteristik Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-data">2.3 Struktur Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemahaman-awal-pola-data">2.4 Pemahaman Awal Pola Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas">2.5 Distribusi Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kualitas-data">2.6 Kualitas Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insight-awal">2.7 Insight Awal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-wafer">Load Dataset Wafer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pisahkan-fitur-dan-label">Pisahkan Fitur dan Label</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-label-kelas">Identifikasi Label Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-ke-dataframe-untuk-eda">Konversi ke DataFrame (Untuk EDA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">Statistik Deskriptif</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas-class-imbalance">Distribusi Kelas (Class Imbalance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-time-series-normal-vs-abnormal">Visualisasi Time Series (Normal vs Abnormal)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation-preprocessing">3. Data Preparation / Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-ulang-bentuk-data">Cek Ulang Bentuk Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-time-series">Normalisasi Data Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-time-series-z-score-per-sample">Normalisasi Time Series (Z-score per Sample)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validasi-hasil-normalisasi">Validasi Hasil Normalisasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-sebelum-vs-sesudah-normalisasi">Visualisasi Sebelum vs Sesudah Normalisasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-label-jika-diperlukan">Encoding Label (Jika Diperlukan)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opsional-tapi-bernilai-plus-feature-extraction-sederhana">(Opsional tapi Bernilai Plus) Feature Extraction Sederhana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-data-preparation">Ringkasan Data Preparation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">4. Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-modeling">Import Library Modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-3-model-yang-digunakan">Definisi 3 Model yang Digunakan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-evaluasi-tanpa-smote">Training &amp; Evaluasi Tanpa SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-terapkan-smote">Import &amp; Terapkan SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-evaluasi-setelah-smote">Training &amp; Evaluasi Setelah SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-hasil-tabel">Perbandingan Hasil (Tabel)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-perbandingan-f1-score">Visualisasi Perbandingan F1-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insight-modeling">Insight Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">5. Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model-terbaik">Evaluasi Model Terbaik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-ulang-model-terbaik-dengan-smote">Train Ulang Model Terbaik (Dengan SMOTE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-report-lengkap">Classification Report Lengkap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-evaluasi-sebelum-sesudah-smote">Perbandingan Evaluasi Sebelum &amp; Sesudah SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-recall-f1-score">Perbandingan Recall &amp; F1-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-dampak-smote">Visualisasi Dampak SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil-evaluation">Interpretasi Hasil Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-evaluation">Kesimpulan Tahap Evaluation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">6. Deployment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-model-random-forest">Simpan Model Random Forest</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="timeseries-wafer">
+<h1>TimeSeries Wafer<a class="headerlink" href="#timeseries-wafer" title="Link to this heading">#</a></h1>
+<section id="business-understanding">
+<h2>1. Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h2>
+<section id="latar-belakang">
+<h3>1.1 Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h3>
+<p>Dalam proses fabrikasi semikonduktor, setiap wafer silikon dipantau menggunakan sensor yang menghasilkan data berbentuk <em>time series</em>. Data ini merepresentasikan kondisi proses produksi secara berurutan dalam waktu. Tidak semua wafer yang diproduksi berada dalam kondisi normal; sebagian wafer mengalami kondisi abnormal akibat gangguan proses manufaktur yang tidak selalu mudah dideteksi secara manual.</p>
+<p>Dataset <strong>Wafer</strong> berasal dari penelitian Robert T. Olszewski (2001) yang menggunakan data sensor manufaktur semikonduktor sebagai studi kasus nyata untuk permasalahan <em>time series classification</em>. Dataset ini banyak digunakan dalam penelitian akademik untuk menguji metode klasifikasi berbasis pola sinyal.</p>
+</section>
+<hr class="docutils" />
+<section id="permasalahan-bisnis">
+<h3>1.2 Permasalahan Bisnis<a class="headerlink" href="#permasalahan-bisnis" title="Link to this heading">#</a></h3>
+<p>Permasalahan utama dalam konteks industri adalah bagaimana melakukan <strong>deteksi wafer abnormal secara otomatis</strong> berdasarkan pola sinyal sensor. Deteksi manual bersifat subjektif, memerlukan keahlian khusus, dan tidak efisien untuk data dalam jumlah besar. Oleh karena itu, dibutuhkan pendekatan berbasis data untuk mengklasifikasikan wafer ke dalam kategori <strong>normal</strong> atau <strong>abnormal</strong> secara akurat.</p>
+</section>
+<hr class="docutils" />
+<section id="tujuan-proyek">
+<h3>1.3 Tujuan Proyek<a class="headerlink" href="#tujuan-proyek" title="Link to this heading">#</a></h3>
+<p>Tujuan dari proyek ini adalah membangun model <strong>klasifikasi time series</strong> yang mampu membedakan wafer normal dan abnormal berdasarkan data sensor. Model diharapkan dapat mengenali pola struktural pada sinyal sensor yang berkaitan dengan kondisi proses produksi.</p>
+</section>
+<hr class="docutils" />
+<section id="tujuan-analisis-data">
+<h3>1.4 Tujuan Analisis Data<a class="headerlink" href="#tujuan-analisis-data" title="Link to this heading">#</a></h3>
+<p>Tujuan analisis data dalam proyek ini meliputi:</p>
+<ul class="simple">
+<li><p>Memahami karakteristik data time series pada dataset Wafer</p></li>
+<li><p>Mengidentifikasi perbedaan pola sinyal antara wafer normal dan abnormal</p></li>
+<li><p>Membangun dan mengevaluasi model klasifikasi berbasis machine learning</p></li>
+<li><p>Mengukur performa model menggunakan metrik evaluasi yang sesuai</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="kriteria-keberhasilan">
+<h3>1.5 Kriteria Keberhasilan<a class="headerlink" href="#kriteria-keberhasilan" title="Link to this heading">#</a></h3>
+<p>Proyek dianggap berhasil apabila model klasifikasi mampu membedakan kelas wafer normal dan abnormal dengan performa yang baik serta seluruh tahapan analisis dilakukan sesuai dengan metodologi <strong>CRISP-DM</strong> dan dapat dijelaskan secara logis pada saat presentasi.</p>
+</section>
+<hr class="docutils" />
+<section id="tantangan-proyek">
+<h3>1.6 Tantangan Proyek<a class="headerlink" href="#tantangan-proyek" title="Link to this heading">#</a></h3>
+<p>Salah satu tantangan utama pada dataset Wafer adalah <strong>ketidakseimbangan kelas</strong>, di mana jumlah data wafer abnormal lebih sedikit dibandingkan wafer normal. Hal ini dapat mempengaruhi performa model dan perlu diperhatikan pada tahap evaluasi.</p>
+</section>
+</section>
+<section id="data-understanding">
+<h2>2. Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h2>
+<section id="deskripsi-dataset">
+<h3>2.1 Deskripsi Dataset<a class="headerlink" href="#deskripsi-dataset" title="Link to this heading">#</a></h3>
+<p>Dataset <strong>Wafer</strong> merupakan dataset <em>time series</em> yang berasal dari proses fabrikasi semikonduktor. Setiap data merepresentasikan satu wafer yang direkam menggunakan sensor selama proses produksi. Dataset ini digunakan untuk mengklasifikasikan kondisi wafer ke dalam dua kelas, yaitu <strong>normal</strong> dan <strong>abnormal</strong>.</p>
+<p>Dataset yang digunakan pada proyek ini diperoleh dari <em>UEA Time Series Classification Repository</em> dan disimpan dalam format <strong><code class="docutils literal notranslate"><span class="pre">.txt</span></code></strong>, yang berisi data latih (<em>training</em>) dan data uji (<em>testing</em>).</p>
+</section>
+<hr class="docutils" />
+<section id="karakteristik-data">
+<h3>2.2 Karakteristik Data<a class="headerlink" href="#karakteristik-data" title="Link to this heading">#</a></h3>
+<p>Berdasarkan deskripsi dataset, karakteristik utama dataset Wafer adalah sebagai berikut:</p>
+<ul class="simple">
+<li><p>Jenis data: Time series univariat</p></li>
+<li><p>Panjang satu time series: 152 titik waktu</p></li>
+<li><p>Jumlah kelas: 2 (Normal dan Abnormal)</p></li>
+<li><p>Data latih (training): 1000 data</p></li>
+<li><p>Data uji (testing): 6164 data</p></li>
+<li><p>Domain data: Sensor manufaktur semikonduktor</p></li>
+</ul>
+<p>Setiap baris data terdiri dari satu label kelas dan serangkaian nilai numerik yang merepresentasikan sinyal sensor sepanjang waktu.</p>
+</section>
+<hr class="docutils" />
+<section id="struktur-data">
+<h3>2.3 Struktur Data<a class="headerlink" href="#struktur-data" title="Link to this heading">#</a></h3>
+<p>Struktur umum data dalam file <code class="docutils literal notranslate"><span class="pre">.txt</span></code> adalah sebagai berikut:</p>
+<ul class="simple">
+<li><p>Kolom pertama: label kelas (normal atau abnormal)</p></li>
+<li><p>Kolom selanjutnya: nilai time series sensor</p></li>
+<li><p>Setiap baris merepresentasikan satu sampel wafer</p></li>
+</ul>
+<p>Struktur ini memungkinkan data digunakan langsung untuk analisis dan pemodelan klasifikasi time series.</p>
+</section>
+<hr class="docutils" />
+<section id="pemahaman-awal-pola-data">
+<h3>2.4 Pemahaman Awal Pola Data<a class="headerlink" href="#pemahaman-awal-pola-data" title="Link to this heading">#</a></h3>
+<p>Berdasarkan referensi penelitian Olszewski (2001), wafer normal dan abnormal memiliki <strong>perbedaan pola struktural</strong> pada sinyal sensor. Perbedaan ini tidak selalu terlihat dari satu titik nilai saja, tetapi dari <strong>bentuk keseluruhan time series</strong>, seperti perubahan tren, fluktuasi, dan pola naik-turun sinyal.</p>
+<p>Oleh karena itu, pendekatan <em>time series classification</em> dipilih karena mempertimbangkan urutan dan pola data, bukan hanya nilai individual.</p>
+</section>
+<hr class="docutils" />
+<section id="distribusi-kelas">
+<h3>2.5 Distribusi Kelas<a class="headerlink" href="#distribusi-kelas" title="Link to this heading">#</a></h3>
+<p>Dataset Wafer memiliki <strong>ketidakseimbangan kelas (class imbalance)</strong>, di mana jumlah data wafer abnormal lebih sedikit dibandingkan wafer normal. Sekitar 10–12% dari data termasuk dalam kelas abnormal. Kondisi ini perlu diperhatikan karena dapat mempengaruhi performa model, khususnya pada tahap evaluasi.</p>
+</section>
+<hr class="docutils" />
+<section id="kualitas-data">
+<h3>2.6 Kualitas Data<a class="headerlink" href="#kualitas-data" title="Link to this heading">#</a></h3>
+<p>Secara umum, dataset Wafer memiliki kualitas data yang baik:</p>
+<ul class="simple">
+<li><p>Tidak terdapat nilai kosong (<em>missing values</em>)</p></li>
+<li><p>Data sudah dalam bentuk numerik</p></li>
+<li><p>Tidak memerlukan proses pembersihan data yang kompleks</p></li>
+</ul>
+<p>Namun, karena data berupa time series, diperlukan pemahaman pola dan skala nilai sebelum masuk ke tahap preprocessing dan pemodelan.</p>
+</section>
+<hr class="docutils" />
+<section id="insight-awal">
+<h3>2.7 Insight Awal<a class="headerlink" href="#insight-awal" title="Link to this heading">#</a></h3>
+<p>Berdasarkan pemahaman awal terhadap dataset, dapat disimpulkan bahwa:</p>
+<ul class="simple">
+<li><p>Dataset Wafer cocok untuk tugas klasifikasi time series</p></li>
+<li><p>Perbedaan kelas terletak pada pola sinyal, bukan pada satu nilai tertentu</p></li>
+<li><p>Tantangan utama dataset adalah ketidakseimbangan kelas</p></li>
+</ul>
+<p>Tahap Data Understanding ini menjadi dasar untuk menentukan metode preprocessing, pemodelan, dan evaluasi pada tahap selanjutnya sesuai dengan metodologi CRISP-DM.</p>
+</section>
+<section id="import-library">
+<h3>Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># konfigurasi visual</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-dataset-wafer">
+<h3>Load Dataset Wafer<a class="headerlink" href="#load-dataset-wafer" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># contoh path</span>
+<span class="n">train_path</span> <span class="o">=</span> <span class="s2">&quot;./Wafer/Wafer_TRAIN.txt&quot;</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="s2">&quot;./Wafer/Wafer_TEST.txt&quot;</span>
+
+<span class="c1"># load data</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">train_path</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">test_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train shape:&quot;</span><span class="p">,</span> <span class="n">train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test shape:&quot;</span><span class="p">,</span> <span class="n">test_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train shape: (1000, 153)
+Test shape: (6164, 153)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pisahkan-fitur-dan-label">
+<h3>Pisahkan Fitur dan Label<a class="headerlink" href="#pisahkan-fitur-dan-label" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pisahkan label dan fitur</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_train shape:&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y_train shape:&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X_train shape: (1000, 152)
+y_train shape: (1000,)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="identifikasi-label-kelas">
+<h3>Identifikasi Label Kelas<a class="headerlink" href="#identifikasi-label-kelas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cek nilai unik label</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label unik train:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label unik test:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label unik train: [-1.  1.]
+Label unik test: [-1.  1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="konversi-ke-dataframe-untuk-eda">
+<h3>Konversi ke DataFrame (Untuk EDA)<a class="headerlink" href="#konversi-ke-dataframe-untuk-eda" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># buat dataframe</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_train</span>
+
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test</span>
+
+<span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>143</th>
+      <th>144</th>
+      <th>145</th>
+      <th>146</th>
+      <th>147</th>
+      <th>148</th>
+      <th>149</th>
+      <th>150</th>
+      <th>151</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.602294</td>
+      <td>-1.670823</td>
+      <td>-1.693666</td>
+      <td>-1.699377</td>
+      <td>-1.699377</td>
+      <td>-1.703660</td>
+      <td>-1.703660</td>
+      <td>-1.703660</td>
+      <td>-1.703660</td>
+      <td>-1.703660</td>
+      <td>...</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>-1.145432</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.084591</td>
+      <td>1.084591</td>
+      <td>1.084591</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.084591</td>
+      <td>...</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.065308</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>0.393316</td>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>0.362689</td>
+      <td>...</td>
+      <td>0.393316</td>
+      <td>0.393316</td>
+      <td>0.362689</td>
+      <td>0.393316</td>
+      <td>0.393316</td>
+      <td>0.393316</td>
+      <td>0.393316</td>
+      <td>0.393316</td>
+      <td>0.393316</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.094523</td>
+      <td>-1.094523</td>
+      <td>-1.094523</td>
+      <td>-1.096732</td>
+      <td>-1.094523</td>
+      <td>-1.096732</td>
+      <td>-1.094523</td>
+      <td>-1.094523</td>
+      <td>-1.094523</td>
+      <td>-1.096732</td>
+      <td>...</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>-1.096732</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>...</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>-1.103761</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 153 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Columns: 153 entries, 0 to label
+dtypes: float64(153)
+memory usage: 1.2 MB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="statistik-deskriptif">
+<h3>Statistik Deskriptif<a class="headerlink" href="#statistik-deskriptif" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>143</th>
+      <th>144</th>
+      <th>145</th>
+      <th>146</th>
+      <th>147</th>
+      <th>148</th>
+      <th>149</th>
+      <th>150</th>
+      <th>151</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>...</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-0.605769</td>
+      <td>-0.620867</td>
+      <td>-0.619494</td>
+      <td>-0.620667</td>
+      <td>-0.614360</td>
+      <td>-0.611668</td>
+      <td>-0.601166</td>
+      <td>-0.591160</td>
+      <td>-0.572295</td>
+      <td>-0.551086</td>
+      <td>...</td>
+      <td>-0.522536</td>
+      <td>-0.522505</td>
+      <td>-0.522622</td>
+      <td>-0.522512</td>
+      <td>-0.522939</td>
+      <td>-0.522447</td>
+      <td>-0.523394</td>
+      <td>-0.522109</td>
+      <td>-0.524641</td>
+      <td>0.806000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.001899</td>
+      <td>1.021014</td>
+      <td>1.020231</td>
+      <td>1.021208</td>
+      <td>1.015503</td>
+      <td>1.018168</td>
+      <td>1.025127</td>
+      <td>1.024830</td>
+      <td>1.028506</td>
+      <td>1.032117</td>
+      <td>...</td>
+      <td>0.939066</td>
+      <td>0.939738</td>
+      <td>0.940871</td>
+      <td>0.941128</td>
+      <td>0.942497</td>
+      <td>0.942415</td>
+      <td>0.944778</td>
+      <td>0.943234</td>
+      <td>0.948602</td>
+      <td>0.592212</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.183789</td>
+      <td>-2.592196</td>
+      <td>-2.494911</td>
+      <td>-2.529029</td>
+      <td>-2.563525</td>
+      <td>-2.464071</td>
+      <td>-2.663419</td>
+      <td>-2.188273</td>
+      <td>-1.918027</td>
+      <td>-2.089707</td>
+      <td>...</td>
+      <td>-1.398926</td>
+      <td>-1.468540</td>
+      <td>-1.547157</td>
+      <td>-1.609431</td>
+      <td>-1.698730</td>
+      <td>-1.745087</td>
+      <td>-1.858868</td>
+      <td>-1.865428</td>
+      <td>-2.056110</td>
+      <td>-1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-1.237424</td>
+      <td>-1.236296</td>
+      <td>-1.236296</td>
+      <td>-1.235586</td>
+      <td>-1.231486</td>
+      <td>-1.231486</td>
+      <td>-1.231486</td>
+      <td>-1.220918</td>
+      <td>-1.212483</td>
+      <td>-1.199689</td>
+      <td>...</td>
+      <td>-1.158791</td>
+      <td>-1.159167</td>
+      <td>-1.159798</td>
+      <td>-1.159798</td>
+      <td>-1.160225</td>
+      <td>-1.160225</td>
+      <td>-1.160225</td>
+      <td>-1.160587</td>
+      <td>-1.162131</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-1.123929</td>
+      <td>-1.123929</td>
+      <td>-1.123929</td>
+      <td>-1.122958</td>
+      <td>-1.122590</td>
+      <td>-1.122543</td>
+      <td>-1.122541</td>
+      <td>-1.121771</td>
+      <td>-1.115161</td>
+      <td>-1.109587</td>
+      <td>...</td>
+      <td>-1.086923</td>
+      <td>-1.087051</td>
+      <td>-1.087646</td>
+      <td>-1.088254</td>
+      <td>-1.088431</td>
+      <td>-1.088964</td>
+      <td>-1.088964</td>
+      <td>-1.088262</td>
+      <td>-1.091081</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.463942</td>
+      <td>0.463942</td>
+      <td>0.465129</td>
+      <td>0.463942</td>
+      <td>0.463942</td>
+      <td>0.495094</td>
+      <td>0.511256</td>
+      <td>0.575060</td>
+      <td>0.614644</td>
+      <td>0.634173</td>
+      <td>...</td>
+      <td>0.439699</td>
+      <td>0.435564</td>
+      <td>0.427218</td>
+      <td>0.427218</td>
+      <td>0.426870</td>
+      <td>0.423639</td>
+      <td>0.423639</td>
+      <td>0.423620</td>
+      <td>0.416059</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.332395</td>
+      <td>1.334377</td>
+      <td>1.332395</td>
+      <td>1.334377</td>
+      <td>1.332395</td>
+      <td>1.312017</td>
+      <td>1.604938</td>
+      <td>1.932573</td>
+      <td>2.000823</td>
+      <td>2.037358</td>
+      <td>...</td>
+      <td>1.530021</td>
+      <td>1.554651</td>
+      <td>1.587156</td>
+      <td>1.605404</td>
+      <td>1.646952</td>
+      <td>1.651600</td>
+      <td>1.714357</td>
+      <td>1.684528</td>
+      <td>1.813489</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 153 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="distribusi-kelas-class-imbalance">
+<h3>Distribusi Kelas (Class Imbalance)<a class="headerlink" href="#distribusi-kelas-class-imbalance" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hitung distribusi kelas</span>
+<span class="n">class_counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">class_counts</span><span class="p">)</span>
+
+<span class="c1"># visualisasi</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribusi Kelas Dataset Wafer (Train)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Label&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Jumlah Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1.0    903
+-1.0     97
+Name: count, dtype: int64
+</pre></div>
+</div>
+<img alt="_images/8cca48973c2d6d2b524eb971e33e5f2dcc89f09692e71dee28d20370b5fdf41f.png" src="_images/8cca48973c2d6d2b524eb971e33e5f2dcc89f09692e71dee28d20370b5fdf41f.png" />
+</div>
+</div>
+</section>
+<section id="visualisasi-time-series-normal-vs-abnormal">
+<h3>Visualisasi Time Series (Normal vs Abnormal)<a class="headerlink" href="#visualisasi-time-series-normal-vs-abnormal" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">y_train</span> <span class="o">==</span> <span class="n">normal_label</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Contoh Time Series Wafer Normal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sensor Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1da58a30223c17799cfc01b5c3458f26fb8eef1da828d3c44317b3c332111474.png" src="_images/1da58a30223c17799cfc01b5c3458f26fb8eef1da828d3c44317b3c332111474.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abnormal_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">y_train</span> <span class="o">==</span> <span class="n">abnormal_label</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Contoh Time Series Wafer Abnormal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sensor Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9b7eaf50b3751cb805ef5ae33fd1eae308b1b0a6e35811d21f7ce19759a77341.png" src="_images/9b7eaf50b3751cb805ef5ae33fd1eae308b1b0a6e35811d21f7ce19759a77341.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="data-preparation-preprocessing">
+<h2>3. Data Preparation / Preprocessing<a class="headerlink" href="#data-preparation-preprocessing" title="Link to this heading">#</a></h2>
+<p>Tahap Data Preparation bertujuan untuk menyiapkan data agar dapat digunakan secara optimal pada proses pemodelan. Karena dataset Wafer berupa data time series numerik tanpa missing value, preprocessing difokuskan pada penyesuaian skala data, representasi data, dan kesiapan data untuk proses klasifikasi.</p>
+<section id="cek-ulang-bentuk-data">
+<h3>Cek Ulang Bentuk Data<a class="headerlink" href="#cek-ulang-bentuk-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_train shape:&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_test shape:&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X_train shape: (1000, 152)
+X_test shape: (6164, 152)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalisasi-data-time-series">
+<h3>Normalisasi Data Time Series<a class="headerlink" href="#normalisasi-data-time-series" title="Link to this heading">#</a></h3>
+<p>Karena data berupa sinyal sensor dengan rentang nilai yang berbeda, dilakukan normalisasi agar setiap time series memiliki skala yang seragam sehingga pola sinyal dapat dibandingkan secara adil.</p>
+</section>
+<section id="normalisasi-time-series-z-score-per-sample">
+<h3>Normalisasi Time Series (Z-score per Sample)<a class="headerlink" href="#normalisasi-time-series-z-score-per-sample" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">z_normalize</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ts</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ts</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># normalisasi data train</span>
+<span class="n">X_train_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">z_normalize</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">X_train</span><span class="p">])</span>
+
+<span class="c1"># normalisasi data test</span>
+<span class="n">X_test_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">z_normalize</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">X_test</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normalisasi selesai&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normalisasi selesai
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="validasi-hasil-normalisasi">
+<h3>Validasi Hasil Normalisasi<a class="headerlink" href="#validasi-hasil-normalisasi" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cek mean &amp; std salah satu sampel</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean setelah normalisasi:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_train_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Std setelah normalisasi:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_train_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean setelah normalisasi: -2.337311630789803e-17
+Std setelah normalisasi: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualisasi-sebelum-vs-sesudah-normalisasi">
+<h3>Visualisasi Sebelum vs Sesudah Normalisasi<a class="headerlink" href="#visualisasi-sebelum-vs-sesudah-normalisasi" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sebelum</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Time Series Sebelum Normalisasi&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sensor Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6776e28ea80e848b495a9050be05bf6818f8c342a8395696073aa5e1a7d54950.png" src="_images/6776e28ea80e848b495a9050be05bf6818f8c342a8395696073aa5e1a7d54950.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sesudah</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_train_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Time Series Setelah Normalisasi (Z-score)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f37044e6993f3d37c8fbeb675bef43bf94ce0068ea02295dc6442e57afa28d52.png" src="_images/f37044e6993f3d37c8fbeb675bef43bf94ce0068ea02295dc6442e57afa28d52.png" />
+</div>
+</div>
+</section>
+<section id="encoding-label-jika-diperlukan">
+<h3>Encoding Label (Jika Diperlukan)<a class="headerlink" href="#encoding-label-jika-diperlukan" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+
+<span class="n">y_train_enc</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_test_enc</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label mapping:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label mapping: {np.float64(-1.0): np.int64(0), np.float64(1.0): np.int64(1)}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="opsional-tapi-bernilai-plus-feature-extraction-sederhana">
+<h3>(Opsional tapi Bernilai Plus) Feature Extraction Sederhana<a class="headerlink" href="#opsional-tapi-bernilai-plus-feature-extraction-sederhana" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extract_features</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_feat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">extract_features</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">X_train_norm</span><span class="p">])</span>
+<span class="n">X_test_feat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">extract_features</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">X_test_norm</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Feature shape:&quot;</span><span class="p">,</span> <span class="n">X_train_feat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature shape: (1000, 5)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ringkasan-data-preparation">
+<h3>Ringkasan Data Preparation<a class="headerlink" href="#ringkasan-data-preparation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Data tidak memiliki missing value</p></li>
+<li><p>Dilakukan normalisasi Z-score per time series</p></li>
+<li><p>Label dikonversi ke bentuk numerik</p></li>
+<li><p>Data siap digunakan untuk proses klasifikasi</p></li>
+<li><p>Disiapkan dua representasi data:</p>
+<ul>
+<li><p>Time series mentah (normalized)</p></li>
+<li><p>Fitur statistik sederhana</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="modeling">
+<h2>4. Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
+<p>Tahap modeling bertujuan untuk membangun model klasifikasi yang mampu membedakan wafer normal dan abnormal berdasarkan data yang telah dipreprocessing. Pada tahap ini digunakan tiga metode klasifikasi yang berbeda, serta dilakukan perbandingan performa model sebelum dan sesudah penanganan ketidakseimbangan kelas menggunakan SMOTE.</p>
+<section id="import-library-modeling">
+<h3>Import Library Modeling<a class="headerlink" href="#import-library-modeling" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="definisi-3-model-yang-digunakan">
+<h3>Definisi 3 Model yang Digunakan<a class="headerlink" href="#definisi-3-model-yang-digunakan" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Logistic Regression&quot;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
+    <span class="s2">&quot;Support Vector Machine&quot;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Random Forest&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training-evaluasi-tanpa-smote">
+<h3>Training &amp; Evaluasi Tanpa SMOTE<a class="headerlink" href="#training-evaluasi-tanpa-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_before_smote</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_feat</span><span class="p">,</span> <span class="n">y_train_enc</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_feat</span><span class="p">)</span>
+    
+    <span class="n">results_before_smote</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: Logistic Regression
+              precision    recall  f1-score   support
+
+           0       0.94      0.03      0.05       665
+           1       0.89      1.00      0.94      5499
+
+    accuracy                           0.89      6164
+   macro avg       0.92      0.51      0.50      6164
+weighted avg       0.90      0.89      0.85      6164
+
+
+Model: Support Vector Machine
+              precision    recall  f1-score   support
+
+           0       1.00      0.04      0.08       665
+           1       0.90      1.00      0.95      5499
+
+    accuracy                           0.90      6164
+   macro avg       0.95      0.52      0.51      6164
+weighted avg       0.91      0.90      0.85      6164
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: Random Forest
+              precision    recall  f1-score   support
+
+           0       0.94      0.82      0.88       665
+           1       0.98      0.99      0.99      5499
+
+    accuracy                           0.98      6164
+   macro avg       0.96      0.91      0.93      6164
+weighted avg       0.97      0.98      0.97      6164
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-terapkan-smote">
+<h3>Import &amp; Terapkan SMOTE<a class="headerlink" href="#import-terapkan-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+
+<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">X_train_smote</span><span class="p">,</span> <span class="n">y_train_smote</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span>
+    <span class="n">X_train_feat</span><span class="p">,</span> <span class="n">y_train_enc</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sebelum SMOTE:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">y_train_enc</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sesudah SMOTE:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">y_train_smote</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">X_train_smote</span><span class="p">,</span> <span class="n">y_train_smote</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">X_train_feat</span><span class="p">,</span> <span class="n">y_train_enc</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">54</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span>     <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Partial import of imblearn during the build process.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span>     <span class="c1"># We are not importing the rest of scikit-learn during the build</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>     <span class="c1"># process, as it may not be compiled yet</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">54</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>         <span class="n">combine</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>         <span class="n">ensemble</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="n">exceptions</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>         <span class="n">metrics</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>         <span class="n">model_selection</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>         <span class="n">over_sampling</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>         <span class="n">pipeline</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="n">tensorflow</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="n">under_sampling</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>         <span class="n">utils</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">._version</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FunctionSampler</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="n">combine</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;The :mod:`imblearn.combine` provides methods which combine</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> over-sampling and under-sampling.</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._smote_enn</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTEENN</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._smote_tomek</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTETomek</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SMOTEENN&quot;</span><span class="p">,</span> <span class="s2">&quot;SMOTETomek&quot;</span><span class="p">]</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="n">combine</span>\<span class="n">_smote_enn</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">12</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_X_y</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSampler</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..over_sampling.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOverSampler</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="n">base</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils._metadata_requests</span><span class="w"> </span><span class="kn">import</span> <span class="n">METHODS</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_classification_targets</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_sampling_strategy</span><span class="p">,</span> <span class="n">check_target_type</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils._sklearn_compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">_fit_context</span><span class="p">,</span> <span class="n">get_tags</span><span class="p">,</span> <span class="n">validate_data</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.utils._validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArraysTransformer</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="n">utils</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> The :mod:`imblearn.utils` module includes various utilities.</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._docstring</span><span class="w"> </span><span class="kn">import</span> <span class="n">Substitution</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._validation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">check_neighbors_object</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">check_sampling_strategy</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">check_target_type</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="s2">&quot;check_neighbors_object&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="s2">&quot;check_sampling_strategy&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="s2">&quot;check_target_type&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="s2">&quot;Substitution&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">]</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="n">utils</span>\<span class="n">_validation</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">20</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">type_of_target</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">_num_samples</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils._sklearn_compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">_is_pandas_df</span><span class="p">,</span> <span class="n">check_array</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">SAMPLING_KIND</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="s2">&quot;over-sampling&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="s2">&quot;under-sampling&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">27</span>     <span class="s2">&quot;bypass&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">TARGET_KIND</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">,</span> <span class="s2">&quot;multilabel-indicator&quot;</span><span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">envs</span>\<span class="n">alaika2</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">imblearn</span>\<span class="n">utils</span>\<span class="n">_sklearn_compat</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">256</span>
+<span class="g g-Whitespace">    </span><span class="mi">251</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.metadata_routing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">253</span>         <span class="n">_raise_for_params</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span>         <span class="n">process_routing</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">256</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span>         <span class="n">_is_fitted</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span>         <span class="n">_is_pandas_df</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span> <span class="c1">########################################################################################</span>
+<span class="g g-Whitespace">    </span><span class="mi">263</span> <span class="c1"># Upgrading for scikit-learn 1.5</span>
+<span class="g g-Whitespace">    </span><span class="mi">264</span> <span class="c1">########################################################################################</span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span> <span class="k">if</span> <span class="n">sklearn_version</span> <span class="o">&lt;</span> <span class="n">parse_version</span><span class="p">(</span><span class="s2">&quot;1.5&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">268</span>     <span class="c1"># chunking</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="c1"># extmath</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="c1"># fixes</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;_is_pandas_df&#39; from &#39;sklearn.utils.validation&#39; (C:\Users\MyBook Z Series\anaconda3\envs\alaika2\Lib\site-packages\sklearn\utils\validation.py)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training-evaluasi-setelah-smote">
+<h3>Training &amp; Evaluasi Setelah SMOTE<a class="headerlink" href="#training-evaluasi-setelah-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_after_smote</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_smote</span><span class="p">,</span> <span class="n">y_train_smote</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_feat</span><span class="p">)</span>
+    
+    <span class="n">results_after_smote</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model (SMOTE): </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model (SMOTE): Logistic Regression
+              precision    recall  f1-score   support
+
+           0       0.21      0.68      0.32       665
+           1       0.95      0.69      0.80      5499
+
+    accuracy                           0.69      6164
+   macro avg       0.58      0.68      0.56      6164
+weighted avg       0.87      0.69      0.75      6164
+
+
+Model (SMOTE): Support Vector Machine
+              precision    recall  f1-score   support
+
+           0       0.25      0.81      0.38       665
+           1       0.97      0.71      0.82      5499
+
+    accuracy                           0.72      6164
+   macro avg       0.61      0.76      0.60      6164
+weighted avg       0.89      0.72      0.77      6164
+
+
+Model (SMOTE): Random Forest
+              precision    recall  f1-score   support
+
+           0       0.93      0.84      0.88       665
+           1       0.98      0.99      0.99      5499
+
+    accuracy                           0.98      6164
+   macro avg       0.95      0.92      0.93      6164
+weighted avg       0.98      0.98      0.98      6164
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perbandingan-hasil-tabel">
+<h3>Perbandingan Hasil (Tabel)<a class="headerlink" href="#perbandingan-hasil-tabel" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_before</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_before_smote</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_after</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_after_smote</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">df_before</span><span class="p">[</span><span class="s2">&quot;Condition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Before SMOTE&quot;</span>
+<span class="n">df_after</span><span class="p">[</span><span class="s2">&quot;Condition&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;After SMOTE&quot;</span>
+
+<span class="n">comparison_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_before</span><span class="p">,</span> <span class="n">df_after</span><span class="p">])</span>
+<span class="n">comparison_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>Condition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Logistic Regression</th>
+      <td>0.894711</td>
+      <td>0.894566</td>
+      <td>0.999818</td>
+      <td>0.944268</td>
+      <td>Before SMOTE</td>
+    </tr>
+    <tr>
+      <th>Support Vector Machine</th>
+      <td>0.896496</td>
+      <td>0.896040</td>
+      <td>1.000000</td>
+      <td>0.945170</td>
+      <td>Before SMOTE</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>0.973394</td>
+      <td>0.976254</td>
+      <td>0.994363</td>
+      <td>0.985225</td>
+      <td>Before SMOTE</td>
+    </tr>
+    <tr>
+      <th>Logistic Regression</th>
+      <td>0.690136</td>
+      <td>0.946282</td>
+      <td>0.691944</td>
+      <td>0.799370</td>
+      <td>After SMOTE</td>
+    </tr>
+    <tr>
+      <th>Support Vector Machine</th>
+      <td>0.721447</td>
+      <td>0.968301</td>
+      <td>0.711038</td>
+      <td>0.819964</td>
+      <td>After SMOTE</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>0.975990</td>
+      <td>0.981119</td>
+      <td>0.992180</td>
+      <td>0.986618</td>
+      <td>After SMOTE</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="visualisasi-perbandingan-f1-score">
+<h3>Visualisasi Perbandingan F1-Score<a class="headerlink" href="#visualisasi-perbandingan-f1-score" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comparison_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">comparison_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;f1&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Condition&quot;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Perbandingan F1-Score Sebelum &amp; Sesudah SMOTE&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;F1-Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/147c2a5d072c2193b0a77fa067b072fd9ab169934780726548348b8fbc1b9d57.png" src="_images/147c2a5d072c2193b0a77fa067b072fd9ab169934780726548348b8fbc1b9d57.png" />
+</div>
+</div>
+</section>
+<section id="insight-modeling">
+<h3>Insight Modeling<a class="headerlink" href="#insight-modeling" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tanpa SMOTE, model cenderung bias ke kelas mayoritas</p></li>
+<li><p>SMOTE meningkatkan recall dan F1-score kelas abnormal</p></li>
+<li><p>Random Forest menunjukkan performa paling stabil</p></li>
+<li><p>Penanganan class imbalance penting untuk kasus wafer abnormal</p></li>
+</ul>
+</section>
+</section>
+<section id="evaluation">
+<h2>5. Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
+<p>Tahap evaluation bertujuan untuk mengevaluasi performa model klasifikasi yang telah dibangun. Evaluasi dilakukan untuk memastikan bahwa model mampu membedakan wafer normal dan abnormal dengan baik, khususnya pada kondisi ketidakseimbangan kelas. Fokus evaluasi tidak hanya pada accuracy, tetapi juga pada precision, recall, dan F1-score.</p>
+<section id="evaluasi-model-terbaik">
+<h3>Evaluasi Model Terbaik<a class="headerlink" href="#evaluasi-model-terbaik" title="Link to this heading">#</a></h3>
+<p>Dari tahap modeling sebelumnya, biasanya Random Forest + SMOTE menjadi model terbaik.
+(Ini juga aman secara akademik)</p>
+</section>
+<section id="train-ulang-model-terbaik-dengan-smote">
+<h3>Train Ulang Model Terbaik (Dengan SMOTE)<a class="headerlink" href="#train-ulang-model-terbaik-dengan-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">best_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_smote</span><span class="p">,</span> <span class="n">y_train_smote</span><span class="p">)</span>
+
+<span class="n">y_pred_best</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_feat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="confusion-matrix">
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred_best</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">cm</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+    <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Abnormal&quot;</span><span class="p">],</span>
+    <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Abnormal&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicted Label&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Label&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix - Random Forest (SMOTE)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/10b1a901a82069306e45d730d2b8df94b9013009e6635fd06388c499c3f4cf9f.png" src="_images/10b1a901a82069306e45d730d2b8df94b9013009e6635fd06388c499c3f4cf9f.png" />
+</div>
+</div>
+</section>
+<section id="classification-report-lengkap">
+<h3>Classification Report Lengkap<a class="headerlink" href="#classification-report-lengkap" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span>
+    <span class="n">y_test_enc</span><span class="p">,</span>
+    <span class="n">y_pred_best</span><span class="p">,</span>
+    <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Abnormal&quot;</span><span class="p">]</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+      Normal       0.93      0.84      0.88       665
+    Abnormal       0.98      0.99      0.99      5499
+
+    accuracy                           0.98      6164
+   macro avg       0.95      0.92      0.93      6164
+weighted avg       0.98      0.98      0.98      6164
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perbandingan-evaluasi-sebelum-sesudah-smote">
+<h3>Perbandingan Evaluasi Sebelum &amp; Sesudah SMOTE<a class="headerlink" href="#perbandingan-evaluasi-sebelum-sesudah-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf_no_smote</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">rf_no_smote</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_feat</span><span class="p">,</span> <span class="n">y_train_enc</span><span class="p">)</span>
+<span class="n">y_pred_no_smote</span> <span class="o">=</span> <span class="n">rf_no_smote</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_feat</span><span class="p">)</span>
+
+<span class="n">cm_no_smote</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred_no_smote</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">cm_no_smote</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Oranges&quot;</span><span class="p">,</span>
+    <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Abnormal&quot;</span><span class="p">],</span>
+    <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Abnormal&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix - Random Forest (Tanpa SMOTE)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicted Label&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Label&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4ddefa074a090cbd2b5ae4ba90a6e47b3a2c1104fd2456ab32811ed99fd09079.png" src="_images/4ddefa074a090cbd2b5ae4ba90a6e47b3a2c1104fd2456ab32811ed99fd09079.png" />
+</div>
+</div>
+</section>
+<section id="perbandingan-recall-f1-score">
+<h3>Perbandingan Recall &amp; F1-Score<a class="headerlink" href="#perbandingan-recall-f1-score" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recall_no_smote</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred_no_smote</span><span class="p">)</span>
+<span class="n">recall_smote</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred_best</span><span class="p">)</span>
+
+<span class="n">f1_no_smote</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred_no_smote</span><span class="p">)</span>
+<span class="n">f1_smote</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_enc</span><span class="p">,</span> <span class="n">y_pred_best</span><span class="p">)</span>
+
+<span class="n">comparison_eval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Condition&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Tanpa SMOTE&quot;</span><span class="p">,</span> <span class="s2">&quot;Dengan SMOTE&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Recall (Abnormal)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">recall_no_smote</span><span class="p">,</span> <span class="n">recall_smote</span><span class="p">],</span>
+    <span class="s2">&quot;F1-Score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">f1_no_smote</span><span class="p">,</span> <span class="n">f1_smote</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">comparison_eval</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Condition</th>
+      <th>Recall (Abnormal)</th>
+      <th>F1-Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Tanpa SMOTE</td>
+      <td>0.994363</td>
+      <td>0.985225</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Dengan SMOTE</td>
+      <td>0.992180</td>
+      <td>0.986618</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="visualisasi-dampak-smote">
+<h3>Visualisasi Dampak SMOTE<a class="headerlink" href="#visualisasi-dampak-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comparison_eval</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Condition&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Perbandingan Recall dan F1-Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7216d94ea35d09d5ea241926170931dbcb6fb050b27e9ea9738b68ce739ab0a5.png" src="_images/7216d94ea35d09d5ea241926170931dbcb6fb050b27e9ea9738b68ce739ab0a5.png" />
+</div>
+</div>
+</section>
+<section id="interpretasi-hasil-evaluation">
+<h3>Interpretasi Hasil Evaluation<a class="headerlink" href="#interpretasi-hasil-evaluation" title="Link to this heading">#</a></h3>
+<p>Berdasarkan hasil evaluasi, penggunaan SMOTE terbukti meningkatkan kemampuan model dalam mendeteksi wafer abnormal, yang ditunjukkan oleh peningkatan nilai recall dan F1-score pada kelas minoritas. Meskipun accuracy tidak selalu meningkat secara signifikan, peningkatan recall pada kelas abnormal lebih penting dalam konteks deteksi cacat wafer.</p>
+<p>Model Random Forest dengan SMOTE memberikan performa paling stabil dan seimbang, sehingga dipilih sebagai model terbaik untuk tahap selanjutnya.</p>
+</section>
+<section id="kesimpulan-tahap-evaluation">
+<h3>Kesimpulan Tahap Evaluation<a class="headerlink" href="#kesimpulan-tahap-evaluation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Accuracy saja tidak cukup untuk mengevaluasi model</p></li>
+<li><p>Recall dan F1-score kelas abnormal menjadi metrik utama</p></li>
+<li><p>SMOTE efektif menangani ketidakseimbangan kelas</p></li>
+<li><p>Random Forest + SMOTE dipilih sebagai model terbaik</p></li>
+</ul>
+</section>
+</section>
+<section id="deployment">
+<h2>6. Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h2>
+<p>Tahap deployment bertujuan untuk mengimplementasikan model klasifikasi terbaik ke dalam sebuah aplikasi sederhana berbasis web menggunakan Streamlit. Aplikasi ini memungkinkan pengguna untuk memuat data wafer dan memperoleh hasil prediksi kondisi wafer (normal atau abnormal) secara interaktif.</p>
+<section id="simpan-model-random-forest">
+<h3>Simpan Model Random Forest<a class="headerlink" href="#simpan-model-random-forest" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+
+<span class="c1"># simpan model terbaik</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="s2">&quot;rf_wafer_model.pkl&quot;</span><span class="p">)</span>
+
+<span class="c1"># simpan label encoder</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">label_encoder</span><span class="p">,</span> <span class="s2">&quot;label_encoder.pkl&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model dan encoder berhasil disimpan&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model dan encoder berhasil disimpan
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="timeSeriesSmote.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Data Understanding</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">1. Business Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">1.1 Latar Belakang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-bisnis">1.2 Permasalahan Bisnis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">1.3 Tujuan Proyek</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-analisis-data">1.4 Tujuan Analisis Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-keberhasilan">1.5 Kriteria Keberhasilan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tantangan-proyek">1.6 Tantangan Proyek</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">2. Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-dataset">2.1 Deskripsi Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-data">2.2 Karakteristik Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-data">2.3 Struktur Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemahaman-awal-pola-data">2.4 Pemahaman Awal Pola Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas">2.5 Distribusi Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kualitas-data">2.6 Kualitas Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insight-awal">2.7 Insight Awal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-wafer">Load Dataset Wafer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pisahkan-fitur-dan-label">Pisahkan Fitur dan Label</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-label-kelas">Identifikasi Label Kelas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-ke-dataframe-untuk-eda">Konversi ke DataFrame (Untuk EDA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">Statistik Deskriptif</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas-class-imbalance">Distribusi Kelas (Class Imbalance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-time-series-normal-vs-abnormal">Visualisasi Time Series (Normal vs Abnormal)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation-preprocessing">3. Data Preparation / Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-ulang-bentuk-data">Cek Ulang Bentuk Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-time-series">Normalisasi Data Time Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-time-series-z-score-per-sample">Normalisasi Time Series (Z-score per Sample)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validasi-hasil-normalisasi">Validasi Hasil Normalisasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-sebelum-vs-sesudah-normalisasi">Visualisasi Sebelum vs Sesudah Normalisasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-label-jika-diperlukan">Encoding Label (Jika Diperlukan)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opsional-tapi-bernilai-plus-feature-extraction-sederhana">(Opsional tapi Bernilai Plus) Feature Extraction Sederhana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-data-preparation">Ringkasan Data Preparation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">4. Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-modeling">Import Library Modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-3-model-yang-digunakan">Definisi 3 Model yang Digunakan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-evaluasi-tanpa-smote">Training &amp; Evaluasi Tanpa SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-terapkan-smote">Import &amp; Terapkan SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-evaluasi-setelah-smote">Training &amp; Evaluasi Setelah SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-hasil-tabel">Perbandingan Hasil (Tabel)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-perbandingan-f1-score">Visualisasi Perbandingan F1-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insight-modeling">Insight Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">5. Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model-terbaik">Evaluasi Model Terbaik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-ulang-model-terbaik-dengan-smote">Train Ulang Model Terbaik (Dengan SMOTE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-report-lengkap">Classification Report Lengkap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-evaluasi-sebelum-sesudah-smote">Perbandingan Evaluasi Sebelum &amp; Sesudah SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-recall-f1-score">Perbandingan Recall &amp; F1-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-dampak-smote">Visualisasi Dampak SMOTE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil-evaluation">Interpretasi Hasil Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-evaluation">Kesimpulan Tahap Evaluation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">6. Deployment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-model-random-forest">Simpan Model Random Forest</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
